@@ -58,20 +58,6 @@ class SteamGamesBarChart extends Component {
                 .range([margin.left, this.WIDTH - margin.right])
                 .padding(0.1)
 
-            const yScale = scaleLinear()
-                .domain([0, dataMax])
-                .range([0, this.WIDTH]);
-
-            // const yAxis = g => g
-            //     .attr("transform", `translate(${margin.left},0)`)
-            //     .call(axisLeft(yScale)
-            //             .tickSizeOuter(0)
-            //             .tickValues( getGameTitles()))
-            //     .call(g => g.select(".domain")
-            //                 .remove()
-            //
-            //     );
-
             let formatNumber = format(".1f");
 
             const xAxis = g => g
@@ -89,41 +75,26 @@ class SteamGamesBarChart extends Component {
                 .data(unit)
                 .enter()
                 .append('g')
+                .attr("transform", "translate(0 ," + margin.top + ")")
                 .append('rect');
-
 
             select(node)
                 .selectAll('rect')
                 .data(unit)
                 .exit()
-                .remove();
+                .remove().attr('class', 'loo');
 
             select(node)
                 .selectAll('rect')
                 .data(unit)
                 .style('fill', '#007799')
                 .style('stroke', '#fff')
-                .attr('x', 225)
-                .attr('y', (d,i) => i * 25)
-                .attr('height', 25)
+                .attr('x', 0)
+                .attr('y', (d,i) => i * 55)
+                .attr('height', 45 - margin.top)
                 .attr('width',d => {
                     return (d[0]/10)
                 });
-
-            select(node)
-                .selectAll('text.values')
-                .data(unit)
-                .enter()
-                .append('g')
-                .append("text")
-                .text(function(d) {
-                    return Number(Math.round((d[0]/60) + 'e2') + 'e-2').toFixed(2) + ' ' + 'hrs';
-                })
-                .attr('x', d => {
-                    return (d[0]/10) + 230
-                })
-                .attr('y', (d,i) => i * 25 + 17)
-                .attr('fill', '#fff')
 
             select(node)
                 .selectAll('text.labels')
@@ -132,11 +103,11 @@ class SteamGamesBarChart extends Component {
                 .append('g')
                 .append('text')
                 .text(function(d) {
-                    return d[1];
+                    return d[1] + ' ' + ':' + ' ' + Number(Math.round((d[0]/60) + 'e2') + 'e-2').toFixed(2) + ' ' + 'hrs';
                 })
-                .attr('x', 220)
-                .attr('y', (d,i) => i * 25 + 17)
-                .attr('text-anchor', 'end')
+                .attr('x', 0)
+                .attr('y', (d,i) => i * 55 + 17)
+                .attr('text-anchor', 'start')
                 .attr('fill', '#fff');
 
 
@@ -147,8 +118,9 @@ class SteamGamesBarChart extends Component {
     render() {
         return (
             <div className="GameChart">
+                <h1>Steam API Data Viz</h1>
                 <svg ref={node => this.node = node}
-                     width={1200} height={500} className={"chart"}>
+                     width={1200} height={1200} className={"chart"}>
                 </svg>
             </div>
         );
