@@ -1,130 +1,116 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, {Component} from 'react';
 import './App.css';
-import { scaleLinear, scaleBand } from 'd3-scale';
-import { max } from  'd3-array';
-import { select } from 'd3-selection';
-import { axisLeft, axisBottom } from 'd3-axis';
-import { format } from 'd3-format'
+import {BrowserRouter as Router, Route, Switch, Link, NavLink} from 'react-router-dom'
+import SteamGamesBarChart from './games.js';
+import ToDrawApp from './toDrawApp.js';
+import steamVizImg from "./assets/imgs/steam-viz-screenshot.png";
+import steamLogo from "./assets/imgs/steam-logo-transparent.png";
 
 class App extends Component {
 
     render() {
-       return <SteamGamesBarChart />
-    }
-}
+        const Header = (props) => <ul>
+            <li>
+                <NavLink to="/" activeClassName="selected-navlink">Home</NavLink>
+            </li>
+            <li>
+                <NavLink to="/steam-data-viz" activeClassName="selected-navlink">Steam Data Viz</NavLink>
+            </li>
+            <li>
+                <NavLink to="/todraw-app" activeClassName="selected-navlink">ToDraw App</NavLink>
+            </li>
+        </ul>;
 
-class SteamGamesBarChart extends Component {
-    WIDTH = 500;
-    height = 500;
-    constructor(props) {
-        super(props);
-        this.createBarChart = this.createBarChart.bind(this);
-        this.state = {
-            gameData: null
-        };
-    }
+        const MainPage = (props) =>  <div>
+            {/*<ul id="categories" className="clr">*/}
+                {/*<li className="pusher"></li>*/}
+                {/*<li>*/}
+                    {/*/!*<NavLink to="/steam-data-viz" activeClassName="selected-navlink">Steam Data Viz</NavLink>*!/*/}
+                    {/*<div>*/}
+                        {/*<img src={steamLogo} alt="project-preview"/>*/}
+                        {/*<a href="#">*/}
+                        {/*<h1>Steam Data Viz</h1>*/}
+                        {/*</a>*/}
+                        {/*<p>A data visualization project using the Steam API and D3</p>*/}
+                    {/*</div>*/}
+                {/*</li>*/}
+                {/*<li>*/}
+                    {/*<div>*/}
+                        {/*<img src="https://farm8.staticflickr.com/7187/6895047173_d4b1a0d798.jpg" alt=""/>*/}
+                        {/*<h1>This is a title</h1>*/}
+                        {/*<p>Some sample text about the article this hexagon leads to</p>*/}
+                    {/*</div>*/}
+                {/*</li>*/}
+                {/*<li>*/}
+                    {/*<div>*/}
+                        {/*<img src="https://farm4.staticflickr.com/3766/12953056854_b8cdf14f21.jpg" alt=""/>*/}
+                        {/*<h1>This is a title</h1>*/}
+                        {/*<p>Some sample text about the article this hexagon leads to</p>*/}
+                    {/*</div>*/}
+                {/*</li>*/}
+                {/*<li>*/}
+                    {/*<div>*/}
+                        {/*<img src="https://farm7.staticflickr.com/6139/5986939269_10721b8017.jpg" alt=""/>*/}
+                        {/*<h1>This is a title</h1>*/}
+                        {/*<p>Some sample text about the article this hexagon leads to</p>*/}
+                    {/*</div>*/}
+                {/*</li>*/}
+                {/*<li>*/}
+                    {/*<div>*/}
+                        {/*<img src="https://farm4.staticflickr.com/3165/5733278274_2626612c70.jpg" alt=""/>*/}
+                        {/*<h1>This is a title</h1>*/}
+                        {/*<p>Some sample text about the article this hexagon leads to</p>*/}
+                    {/*</div>*/}
+                {/*</li>*/}
 
-    async componentDidMount() {
-        const gamesResponse = await axios.get("/games");
-        this.setState({
-            gameData: gamesResponse.data
-        });
-        this.createBarChart();
-    }
+            {/*</ul>*/}
+            <svg className={"hex-pattern"} width="100%" height="100vh" >
+                <pattern id="pattern-hex" x="0" y="0" width="112" height="190" patternUnits="userSpaceOnUse" viewBox="56 -254 112 190">
 
-    componentDidUpdate() {
-        this.createBarChart();
-    }
+                    <g id="hexagon">
+                        <path d="M168-127.1c0.5,0,1,0.1,1.3,0.3l53.4,30.5c0.7,0.4,1.3,1.4,1.3,2.2v61c0,0.8-0.6,1.8-1.3,2.2L169.3-0.3
+			c-0.7,0.4-1.9,0.4-2.6,0l-53.4-30.5c-0.7-0.4-1.3-1.4-1.3-2.2v-61c0-0.8,0.6-1.8,1.3-2.2l53.4-30.5C167-127,167.5-127.1,168-127.1
+			L168-127.1z"/>
+                        <path d="M112-222.5c0.5,0,1,0.1,1.3,0.3l53.4,30.5c0.7,0.4,1.3,1.4,1.3,2.2v61c0,0.8-0.6,1.8-1.3,2.2l-53.4,30.5
+			c-0.7,0.4-1.9,0.4-2.6,0l-53.4-30.5c-0.7-0.4-1.3-1.4-1.3-2.2v-61c0-0.8,0.6-1.8,1.3-2.2l53.4-30.5
+			C111-222.4,111.5-222.5,112-222.5L112-222.5z"/>
+                        <path d="M168-317.8c0.5,0,1,0.1,1.3,0.3l53.4,30.5c0.7,0.4,1.3,1.4,1.3,2.2v61c0,0.8-0.6,1.8-1.3,2.2L169.3-191
+			c-0.7,0.4-1.9,0.4-2.6,0l-53.4-30.5c-0.7-0.4-1.3-1.4-1.3-2.2v-61c0-0.8,0.6-1.8,1.3-2.2l53.4-30.5
+			C167-317.7,167.5-317.8,168-317.8L168-317.8z"/>
+                    </g>
 
-    createBarChart() {
-
-        if (this.state.gameData) {
-
-            const playedGames = this.state.gameData.games.filter(game => game.playtime_forever > 1);
-            const timePlayed = playedGames.map(game => game.playtime_forever);
-            const names = playedGames.map(game => game.name);
-
-            let unit = timePlayed.map((e,index) => [e, names[index]]);
-
-            const node = this.node;
-            const dataMax = max(timePlayed);
-            const margin = ({top: 20, right: 0, bottom: 30, left: 40});
-
-            const x = scaleBand()
-                .domain(unit.map(d=> {
-                    return d[0];
-                }))
-                .range([margin.left, this.WIDTH - margin.right])
-                .padding(0.1)
-
-            let formatNumber = format(".1f");
-
-            const xAxis = g => g
-                .attr("transform", `translate(0,${this.height - margin.bottom})`)
-                .call(axisBottom(x) .tickSize(this.WIDTH)
-                    .tickFormat(function(d) {
-                        let s = formatNumber(d / 1e6);
-                        return this.parentNode.nextSibling
-                            ? "\xa0" + s
-                            : "$" + s + " million";
-                    }))
-
-            select(node)
-                .selectAll('rect')
-                .data(unit)
-                .enter()
-                .append('g')
-                .attr("transform", "translate(0 ," + margin.top + ")")
-                .append('rect');
-
-            select(node)
-                .selectAll('rect')
-                .data(unit)
-                .exit()
-                .remove().attr('class', 'loo');
-
-            select(node)
-                .selectAll('rect')
-                .data(unit)
-                .style('fill', '#007799')
-                .style('stroke', '#fff')
-                .attr('x', 0)
-                .attr('y', (d,i) => i * 55)
-                .attr('height', 45 - margin.top)
-                .attr('width',d => {
-                    return (d[0]/10)
-                });
-
-            select(node)
-                .selectAll('text.labels')
-                .data(unit)
-                .enter()
-                .append('g')
-                .append('text')
-                .text(function(d) {
-                    return d[1] + ' ' + ':' + ' ' + Number(Math.round((d[0]/60) + 'e2') + 'e-2').toFixed(2) + ' ' + 'hrs';
-                })
-                .attr('x', 0)
-                .attr('y', (d,i) => i * 55 + 17)
-                .attr('text-anchor', 'start')
-                .attr('fill', '#fff');
+                </pattern>
 
 
-        }
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-hex)" />
 
-    }
+            </svg>
+        </div>
 
-    render() {
+
         return (
-            <div className="GameChart">
-                <h1>Steam API Data Viz</h1>
-                <svg ref={node => this.node = node}
-                     width={1200} height={1200} className={"chart"}>
-                </svg>
-            </div>
-        );
+
+                <div>
+                    <Router>
+                        <React.Fragment>
+                            <div className={"header"}>
+                                <h1 className={"header-text"}>Portfolio Site</h1>
+                                <Route className={"navigation"} path="/" component={Header}/>
+                            </div>
+
+                            <Switch>
+                                <Route path="/" exact render={() => <MainPage/>}/>
+                                <Route path="/steam-data-viz" component={SteamGamesBarChart}/>
+                                <Route path="/todraw-app" component={ToDrawApp}/>
+                            </Switch>
+                        </React.Fragment>
+                    </Router>
+                </div>
+
+
+        )
     }
 }
+
 
 export default App;
