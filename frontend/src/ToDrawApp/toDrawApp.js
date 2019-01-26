@@ -7,8 +7,8 @@ class ToDrawApp extends Component {
 
    render() {
         return(
-            <div className="GameChart">
-                <p>dklfhosdlkfhsd</p>
+            <div>
+                <p>To draw app</p>
             </div>
         )
 

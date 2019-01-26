@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch, Link, NavLink} from 'react-router-dom'
-import SteamGamesBarChart from './games.js';
-import ToDrawApp from './toDrawApp.js';
 import Home from './home.js';
+import SteamGamesBarChart from './GamesViz/games.js';
+import GameReviews from './GameReviews/gameReviews';
+import ToDrawApp from './ToDrawApp/toDrawApp.js';
+import InstaFeed from './InstaFeed/instafeed';
+import Pokedex from './Pokedex/pokedex';
+
 
 class App extends Component {
 
@@ -16,7 +20,16 @@ class App extends Component {
                 <NavLink to="/steam-data-viz" activeClassName="selected-navlink">Steam Data Viz</NavLink>
             </li>
             <li>
+                <NavLink to="/game-reviews" activeClassName="selected-navlink">Game Reviews</NavLink>
+            </li>
+            <li>
                 <NavLink to="/todraw-app" activeClassName="selected-navlink">ToDraw App</NavLink>
+            </li>
+            <li>
+                <NavLink to="/instafeed" activeClassName="selected-navlink">InstaFeed</NavLink>
+            </li>
+            <li>
+                <NavLink to="/pokedex" activeClassName="selected-navlink">Pokedex</NavLink>
             </li>
         </ul>;
 
@@ -31,6 +44,9 @@ class App extends Component {
                             </div>
 
                             <Switch>
+                                <Route path="/instafeed" component={InstaFeed}/>
+                                <Route path="/pokedex" component={Pokedex}/>
+                                <Route path="/game-reviews" component={GameReviews}/>
                                 <Route path="/steam-data-viz" component={SteamGamesBarChart}/>
                                 <Route path="/todraw-app" component={ToDrawApp}/>
                                 <Route exact path="/" component={Home}/>
