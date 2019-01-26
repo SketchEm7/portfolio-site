@@ -133,7 +133,7 @@ class SteamGamesBarChart extends Component {
                         <input className={"steam-input"} aria-label={"steam-id"} placeholder="Steam ID" onChange={this.handleChange("steamId")}/>
                         <button onClick={this.loadSteamId} className="input-btn">Load</button>
                     </div>
-
+                    <p className="header-text desktop-containers-text">Technologies Used</p>
                     <div className="tech-used-box desktop-containers-text">
                         <div className="tech-logos-box">
                             <img  className="tech-used-logo" src={steamLogo} alt={"steam-logo"}/>
