@@ -58,6 +58,14 @@ def sql_database():
     return dynamic_data_entry()
 
 
+@app.route('/pokedex')
+def pokedex_db():
+    from pokedex_app.pokedex import create_table
+    from pokedex_app.pokedex import insert_pokemon
+    create_table()
+    return insert_pokemon()
+
+
 app.register_blueprint(todraw, url_prefix="/todraw")
 
 if __name__ == '_main_':
