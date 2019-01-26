@@ -1,0 +1,57 @@
+$primary-color: #b30000;
+$screen-color: beige;
+$border-radius: 25px;
+
+.pokedex {
+  display: flex;
+  margin: 20px auto;
+  width: 80%;
+}
+
+.pokedexDoor {
+  background-color: #b30000;
+  border-bottom-left-radius: $border-radius;
+  width: 50%;
+  height: 80%;
+  min-height: 800px;
+  position: relative;
+  bottom: -100px;
+  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 100%, 0 100%, 0 32%);
+  clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 100%, 0 100%, 0 32%);
+}
+
+.doorInset {
+  border: inset 4px #fff;
+  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 100%, 0 100%, 0 32%);
+  clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 100%, 0 100%, 0 32%);
+  height: 700px;
+  width: 80%;
+  margin: 40px auto;
+}
+
+.pokedexMain {
+  background-color: $primary-color;
+  width: 50%;
+  height: 100%;
+  min-height: 900px;
+}
+
+.pokedexHeader {
+
+}
+
+.circle {
+  background-color: #00afe8;
+  border-radius: 80px;
+  height: 80px;
+  width: 80px;
+}
+
+.pokedexScreen {
+  background-color: $screen-color;
+  width: 90%;
+  margin: 20px auto;
+  border-radius: $border-radius;
+  min-height: 400px;
+}
+
