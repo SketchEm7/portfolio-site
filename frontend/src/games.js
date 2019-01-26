@@ -4,6 +4,8 @@ import axios from 'axios';
 import steamLogo from "./assets/imgs/steam-logo-transparent.png";
 import d3Logo from "./assets/imgs/d3.png";
 import React from "react";
+import styles from "./games.module.scss";
+import cx from 'classnames';
 
 class SteamGamesBarChart extends Component {
     WIDTH = 500;
@@ -123,7 +125,7 @@ class SteamGamesBarChart extends Component {
         return (
             <div className="GameChart">
                 <div className={"project-desc-container"}>
-                    <h1 className={"desktop-containers-text"}>Steam API Data Viz</h1>
+                    <h1 className={cx(styles.heading, "desktop-containers-text ")}>Steam API Data Viz</h1>
                     <p className="header-text desktop-containers-text">This project is a data visualization created using the D3 library and data provided from the Steam API. To see your stats please enter your Steam ID and click the load button. Please note your Steam Profile must be set to public for this visualization to work.</p>
                     <br/>
                     <p className="header-text desktop-containers-text"> Not sure what your Steam ID is? <a href={"https://steamid.io/"} target={"blank"}>https://steamid.io/</a></p>
