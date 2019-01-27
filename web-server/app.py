@@ -62,8 +62,10 @@ def sql_database():
 def pokedex_db():
     from pokedex_app.pokedex import create_table
     from pokedex_app.pokedex import insert_pokemon
+    from pokedex_app.pokedex import get_pokemon
     create_table()
-    return insert_pokemon()
+    insert_pokemon()
+    return get_pokemon()
 
 
 app.register_blueprint(todraw, url_prefix="/todraw")

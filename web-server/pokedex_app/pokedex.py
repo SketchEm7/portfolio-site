@@ -1,4 +1,5 @@
 import sqlite3
+from flask import jsonify
 
 # connect to database
 def dict_factory(cursor, row):
@@ -8,7 +9,7 @@ def dict_factory(cursor, row):
     return d
 
 
-conn = sqlite3.connect('pokedex.db')
+conn = sqlite3.connect('pokedex.db', check_same_thread=False)
 conn.row_factory = dict_factory
 cur = conn.cursor()
 
@@ -23,14 +24,14 @@ def insert_pokemon():
         (1,	"Bulbasaur","Grass", "Poison",318,45,49,49,65,65,45),
         (2, "Ivysaur", "Grass", "Poison",405,60,62,63,80,80,60),
         (3, "Venusaur", "Grass", "Poison",525,80,82,83,100,100,80),
-        (4, "Charmander", "Fire", null, 309,39,52,43,60,50,65),
-        (5, "Charmeleon", "Fire", null, 405,58,64,58,80,65,80),
+        (4, "Charmander", "Fire", None, 309,39,52,43,60,50,65),
+        (5, "Charmeleon", "Fire", None, 405,58,64,58,80,65,80),
         (6, "Charizard", "Fire", "Flying", 534,78,84,78,109,85,100),
-        (7, "Squirtle", "Water", null, 314,44,48,65,50,64,43),
-        (8, "Wartortle", "Water", null, 405,59,63,80,65,80,58),
-        (9, "Blastoise", "Water", null, 530,79,83,100,85,105,78),
-        (10, "Caterpie", "Bug", null, 195,45,30,35,20,20,45),
-        (11, "Metapod", "Bug", null, 205,50,20,55,25,25,30),
+        (7, "Squirtle", "Water", None, 314,44,48,65,50,64,43),
+        (8, "Wartortle", "Water", None, 405,59,63,80,65,80,58),
+        (9, "Blastoise", "Water", None, 530,79,83,100,85,105,78),
+        (10, "Caterpie", "Bug", None, 195,45,30,35,20,20,45),
+        (11, "Metapod", "Bug", None, 205,50,20,55,25,25,30),
         (12, "Butterfree", "Bug", "Flying", 395,60,45,50,90,80,70),
         (13," Weedle", "Bug", "Poison", 195,40,35,30,20,20,50),
         (14, "Kakuna", "Bug", "Poison", 205,45,25,50,25,25,35),
@@ -38,21 +39,40 @@ def insert_pokemon():
         (16, "Pidgey", "Normal", "Flying", 251,40,45,40,35,35,56),
         (17, "Pidgeotto", "Normal", "Flying", 349,63,60,55,50,50,71),
         (18, "Pidgeot", "Normal", "Flying", 479,83,80,75,70,70,101),
-        (19, "Rattata", "Normal", null, 253,30,56,35,25,35,72),
-        (20, "Raticate", "Normal", null, 413,55,81,60,50,70,97),
+        (19, "Rattata", "Normal", None, 253,30,56,35,25,35,72),
+        (20, "Raticate", "Normal", None, 413,55,81,60,50,70,97),
         (21, "Spearow", "Normal", "Flying", 262,40,60,30,31,31,70),
         (22, "Fearow", "Normal", "Flying", 442,65,90,65,61,61,100),
-        (23, "Ekans", "Poison", null, 288,35,60,44,40,54,55),
-        (24, "Arbok", "Poison", null, 438,60,85,69,65,79,80),
-        (25, "Pikachu", "Electric", null, 320,35,55,40,50,50,90),
-        (26, "Raichu", "Electric", null, 485,60,90,55,90,80,110),
-        (27, "Sandshrew", "Ground", null, 300,50,75,85,20,30,40),
-        (28, "Sandslash", "Ground", null, 450,75,100,110,45,55,65),
+        (23, "Ekans", "Poison", None, 288,35,60,44,40,54,55),
+        (24, "Arbok", "Poison", None, 438,60,85,69,65,79,80),
+        (25, "Pikachu", "Electric", None, 320,35,55,40,50,50,90),
+        (26, "Raichu", "Electric", None, 485,60,90,55,90,80,110),
+        (27, "Sandshrew", "Ground", None, 300,50,75,85,20,30,40),
+        (28, "Sandslash", "Ground", None, 450,75,100,110,45,55,65),
     ]
     cur.executemany("""
-        INSERT INTO pokemon_table (id, name, type_one, type_two,total, hp, attack, defense, sp_attack, sp_defense, speed)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", values_to_insert)
+        INSERT INTO pokemon_table (id, name, type_one, type_two, total, hp, attack, defense, sp_attack, sp_defense, speed)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", values_to_insert)
+    conn.commit()
 
 
-create_table()
-insert_pokemon()
+def get_pokemon():
+    cur.execute('select * from pokemon_table')
+    rows = cur.fetchall()
+    return jsonify([
+        {
+            'id': result['id'],
+            'name': result['name'],
+            'type_one': result['type_one'],
+            'type_two': result['type_two'],
+            'total': result['total'],
+            'hp': result['hp'],
+            'attack': result['attack'],
+            'defense': result['defense'],
+            'sp_attack': result['sp_attack'],
+            'sp_defense': result['sp_defense'],
+            'speed': result['speed'],
+        }
+        for result in rows
+    ])
+
