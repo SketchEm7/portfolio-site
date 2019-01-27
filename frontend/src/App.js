@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import './App.css';
-import {BrowserRouter as Router, Route, Switch, Link, NavLink} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch, Link, NavLink, Image} from 'react-router-dom'
 import Home from './home.js';
 import SteamGamesBarChart from './GamesViz/games.js';
 import GameReviews from './GameReviews/gameReviews';
 import ToDrawApp from './ToDrawApp/toDrawApp.js';
 import InstaFeed from './InstaFeed/instafeed';
 import Pokedex from './Pokedex/pokedex';
+import d3Logo from './assets/imgs/d3.png';
 
 
 class App extends Component {
@@ -14,7 +15,11 @@ class App extends Component {
     render() {
         const Header = (props) => <ul>
             <li>
-                <NavLink exact={"/"} to="/" activeClassName="selected-navlink">Home</NavLink>
+                {/*<Link to="/">*/}
+                    {/*<img src={d3Logo}/>*/}
+                    {/*<div className="logo" style={{ backgroundImage: `url(/src/assets/imgs/steam-logo-transparent.png)`}} />*/}
+                {/*</Link>*/}
+                <NavLink to="/" exact activeClassName="selected-navlink">Home</NavLink>
             </li>
             <li>
                 <NavLink to="/steam-data-viz" activeClassName="selected-navlink">Steam Data Viz</NavLink>
