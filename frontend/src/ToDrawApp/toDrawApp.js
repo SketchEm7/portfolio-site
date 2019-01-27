@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styles from "./toDrawApp.module.scss";
 import cx from 'classnames';
+import { ChromePicker } from 'react-color';
 
 class ToDrawApp extends Component {
     constructor(props) {
@@ -44,7 +45,9 @@ class ToDrawApp extends Component {
             <div className={styles.list}>
                 <form onSubmit={this.onSubmit}>
                     <input value={this.state.term} onChange={this.onChange}/>
-                    <div>Palette here:</div>
+                    <div>Palette here:
+                        <ChromePicker/>
+                    </div>
                     <button>Submit</button>
                 </form>
                 <List items={this.state.items} />

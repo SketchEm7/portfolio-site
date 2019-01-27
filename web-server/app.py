@@ -60,11 +60,7 @@ def sql_database():
 
 @app.route('/pokedex')
 def pokedex_db():
-    from pokedex_app.pokedex import create_table
-    from pokedex_app.pokedex import insert_pokemon
     from pokedex_app.pokedex import get_pokemon
-    create_table()
-    insert_pokemon()
     return get_pokemon()
 
 
