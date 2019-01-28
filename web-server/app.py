@@ -64,6 +64,12 @@ def pokedex_db():
     return get_pokemon()
 
 
+@app.route('/pokedex/{name}')
+def pokedex_name_lookup():
+    from pokedex_app.pokedex import get_pokemon_by_name
+    return get_pokemon_by_name()
+
+
 app.register_blueprint(todraw, url_prefix="/todraw")
 
 if __name__ == '_main_':

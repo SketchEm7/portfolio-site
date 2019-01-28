@@ -34,3 +34,24 @@ def get_pokemon():
         for result in rows
     ])
 
+
+def get_pokemon_by_name():
+    constraint: str
+    cur.execute("select * from pokemon_table WHERE  'name' = ? ", (constraint))
+    rows = cur.fetchone()
+    return jsonify([
+        {
+            'id': result['id'],
+            'name': result['name'],
+            'type_one': result['type_one'],
+            'type_two': result['type_two'],
+            'total': result['total'],
+            'hp': result['hp'],
+            'attack': result['attack'],
+            'defense': result['defense'],
+            'sp_attack': result['sp_attack'],
+            'sp_defense': result['sp_defense'],
+            'speed': result['speed'],
+        }
+        for result in rows
+    ])

@@ -1,10 +1,22 @@
 import React, {Component} from "react";
 import styles from "./pokedex.module.scss";
 import cx from 'classnames';
+import axios from 'axios';
 
 class Pokedex extends Component {
     constructor(props){
         super(props)
+        this.state = {
+            pokemon: null,
+        }
+    }
+
+    async componentDidMount(){
+        const pokedex = await axios.get(`/pokedex`);
+        this.setState({
+            pokemon: pokedex.data,
+        })
+        console.log(this.state.pokemon);
     }
 
     render() {
