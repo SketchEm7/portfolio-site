@@ -14,44 +14,34 @@ conn.row_factory = dict_factory
 cur = conn.cursor()
 
 
+def row_to_object(row):
+    return {
+        'id': row['id'],
+        'name': row['name'],
+        'type_one': row['type_one'],
+        'type_two': row['type_two'],
+        'total': row['total'],
+        'hp': row['hp'],
+        'attack': row['attack'],
+        'defense': row['defense'],
+        'sp_attack': row['sp_attack'],
+        'sp_defense': row['sp_defense'],
+        'speed': row['speed'],
+    }
+
+
 def get_pokemon():
     cur.execute('select * from pokemon_table')
     rows = cur.fetchall()
     return jsonify([
-        {
-            'id': result['id'],
-            'name': result['name'],
-            'type_one': result['type_one'],
-            'type_two': result['type_two'],
-            'total': result['total'],
-            'hp': result['hp'],
-            'attack': result['attack'],
-            'defense': result['defense'],
-            'sp_attack': result['sp_attack'],
-            'sp_defense': result['sp_defense'],
-            'speed': result['speed'],
-        }
+        row_to_object(result)
         for result in rows
     ])
 
 
-def get_pokemon_by_name():
-    constraint: str
-    cur.execute("select * from pokemon_table WHERE  'name' = ? ", (constraint))
-    rows = cur.fetchone()
-    return jsonify([
-        {
-            'id': result['id'],
-            'name': result['name'],
-            'type_one': result['type_one'],
-            'type_two': result['type_two'],
-            'total': result['total'],
-            'hp': result['hp'],
-            'attack': result['attack'],
-            'defense': result['defense'],
-            'sp_attack': result['sp_attack'],
-            'sp_defense': result['sp_defense'],
-            'speed': result['speed'],
-        }
-        for result in rows
-    ])
+def get_pokemon_by_name(pokemon_name: str):
+    cur.execute("select * from pokemon_table WHERE lower(name) = lower(?)", [pokemon_name])
+    row = cur.fetchone()
+    return jsonify(row_to_object(row))
+
+# TODO: handle nidorans have weird char and same name
