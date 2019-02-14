@@ -1,16 +1,15 @@
 $primary-color: #b30000;
 $screen-color: beige;
-$border-radius: 25px;
+$border-radius: 1rem;
 
 .pokedex {
   display: flex;
-  margin: 20px auto;
+  margin: 2rem auto;
   width: 80%;
 }
 
 .pokedexDoor {
   background-color: #b30000;
-  border-bottom-left-radius: $border-radius;
   width: 50%;
   height: 80%;
   min-height: 800px;
@@ -31,6 +30,7 @@ $border-radius: 25px;
 
 .pokedexMain {
   background-color: $primary-color;
+  border-radius: $border-radius;
   width: 50%;
   height: 100%;
   min-height: 900px;
@@ -41,10 +41,12 @@ $border-radius: 25px;
 }
 
 .circle {
-  background-color: #00afe8;
   border-radius: 80px;
   height: 80px;
   width: 80px;
+  background-image: linear-gradient(-90deg, #0a58ae, #6bdbff);
+  border: solid #fff;
+  margin: .8rem 2rem;
 }
 
 .pokedexScreen {
@@ -52,6 +54,6 @@ $border-radius: 25px;
   width: 90%;
   margin: 20px auto;
   border-radius: $border-radius;
-  min-height: 400px;
+  min-height: 25rem;
 }
 
