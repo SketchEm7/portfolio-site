@@ -32,6 +32,7 @@ class Pokedex extends Component {
                         <div className={styles.pokedexScreen}>
 
                         </div>
+                        <input placeholder={"Enter Pokemon"}/>
 
                     </div>
                     <div className={styles.pokedexDoor}>

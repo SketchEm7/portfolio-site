@@ -50,15 +50,18 @@ body {
     opacity: .5;
 }
 
+$primary-color: #80cbc4;
+$secondary-color: #4f9b94;
+
 path {
     fill: #212121;
     opacity: .2;
-    stroke: #80cbc4;
+    stroke: $primary-color;
     stroke-width: 1;
 }
 
-a {
-    color: #80cbc4;
+a, a:hover {
+    color: $primary-color;
     text-decoration: none;
 }
 
@@ -109,56 +112,37 @@ h1,h2,h3,h4,h5,h6,p,a,li {
     left: 0;
     right: 0;
 }
-.steam-input {
-    padding: 6px;
-    border: solid 2px #4f9b94;
-    border-right: none;
-    border-radius: 3px;
-}
-
-.tech-used-box {
-    display: flex;
-    margin: 0 auto;
-}
-.tech-logos-box {
-    border: solid 2px #4f9b94;
-    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
-    width: -moz-max-content;    /* Firefox/Gecko */
-    width: -webkit-max-content; /* Chrome */
-}
-.tech-used-logo {
-    height: 50px;
-    width: 50px;
-}
-.GameChart {
-    background-color: #212121;
-}
 
 .project-desc-container {
     background-color: #484848;
     padding: 20px 0;
 }
 
-.GameChart h1 {
+.project-desc-container {
+  h1 {
     color: #fff;
+  }
+  h3 {
+    margin-top: 1rem;
+  }
 }
 
-.personName-container {
-    background-color: #212121;
-    margin: 20px auto;
-}
-
-.personName {
-    color: white;
-}
-
-.chart {
-    font: 1em 'Noto Sans', sans-serif;
-    background-color: #212121;
-    text-align: right;
-    padding: 3px;
-    margin: 0 auto;
+.tech-used-box {
     display: flex;
+    margin: 0 auto;
+}
+
+.tech-logos-box {
+    border: solid 2px #4f9b94;
+    padding: 2px 2px 0px;
+    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content;    /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+}
+
+.tech-used-logo {
+    height: 50px;
+    width: 50px;
 }
 
 .undefined-msg {
@@ -181,10 +165,8 @@ h1,h2,h3,h4,h5,h6,p,a,li {
     margin: 10px 0 0;
 }
 
-.input-btn {
-    background-color: #80cbc4;
-    border-style: none;
-    padding: 8px 20px;
-    border-radius: 4px;
-    margin-left: -5px;
+
+.helper-text {
+    font-size: .8em;
 }
+

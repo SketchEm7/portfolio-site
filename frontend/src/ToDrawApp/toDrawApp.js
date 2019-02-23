@@ -53,21 +53,33 @@ class ToDrawApp extends Component {
        );
 
         return(
-            <div className={styles.list}>
-                <form onSubmit={this.onSubmit}>
-                    <span>Title</span>
-                    <div>
-                        <input className={styles.titleInput} aria-label={"title"} value={this.state.title} name="title" onChange={this.onChange}/>
-                    </div>
+            <div>
+                <div className={"project-desc-container"}>
+                    <h1 className={cx(styles.heading, "desktop-containers-text ")}>ToDraw App</h1>
+                    <p className="header-text desktop-containers-text">This is a to-do app with a specialized theme of drawing. It's a to-draw app. For each entry in the list the user may include a title, a description, a color palette, and a reference photo in preperation for a drawing. </p>
+                    <h3 className="header-text desktop-containers-text">Technologies Used</h3>
+                    <div className="tech-used-box desktop-containers-text">
+                        <div className="tech-logos-box">
 
-                    <span>Description</span>
-                    <input aria-label={"term"} value={this.state.term} name="term" onChange={this.onChange}/>
-                    <div>Palette here:
-                        <ChromePicker/>
+                        </div>
                     </div>
-                    <button>Submit</button>
-                </form>
-                <List items={this.state.items} />
+                </div>
+                <div className={styles.list}>
+                    <form onSubmit={this.onSubmit}>
+                        <span>Title</span>
+                        <div>
+                            <input className={styles.titleInput} aria-label={"title"} value={this.state.title} name="title" onChange={this.onChange}/>
+                        </div>
+
+                        <span>Description</span>
+                        <input aria-label={"term"} value={this.state.term} name="term" onChange={this.onChange}/>
+                        <div>Palette here:
+                            <ChromePicker/>
+                        </div>
+                        <button>Submit</button>
+                    </form>
+                    <List items={this.state.items} />
+                </div>
             </div>
         )
 

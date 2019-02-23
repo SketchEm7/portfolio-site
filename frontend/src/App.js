@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import {BrowserRouter as Router, Route, Switch, Link, NavLink, Image} from 'react-router-dom'
 import Home from './home.js';
 import SteamGamesBarChart from './GamesViz/games.js';
@@ -40,13 +40,12 @@ class App extends Component {
 
         return (
 
-                <div>
                     <Router>
                         <React.Fragment>
-                            <div className={"header"}>
+                            <header className={"header"}>
                                 <h1 className={"header-text"}>SketchEm93</h1>
                                 <Route className={"navigation"} path="/" component={Header}/>
-                            </div>
+                            </header>
 
                             <Switch>
                                 <Route path="/instafeed" component={InstaFeed}/>
@@ -58,8 +57,6 @@ class App extends Component {
                             </Switch>
                         </React.Fragment>
                     </Router>
-                </div>
-
 
         )
     }

@@ -15,7 +15,7 @@ class Home extends Component {
                 </div>
 
 
-                <svg className={"hex-pattern"} width="100%" height="100vh" >
+                <svg className={"hex-pattern"} width="100%" height="100em" >
                     <pattern id="pattern-hex" x="0" y="0" width="112" height="190" patternUnits="userSpaceOnUse" viewBox="56 -254 112 190">
 
                         <g id="hexagon">

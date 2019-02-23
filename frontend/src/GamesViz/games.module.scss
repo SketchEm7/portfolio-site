@@ -1,5 +1,47 @@
-.heading{
-  color: #00ff00;
+$primary-color:  #80cbc4;
+
+.GameChart {
+  background-color: #212121;
+}
+
+.GameChart h1 {
+  color: #fff;
+}
+
+.personName-container {
+  background-color: #212121;
+  margin: 20px auto;
+  width: 1200px;
+}
+
+.dropdownContainer {
+  margin-top: 1rem;
+}
+
+.personName {
+  color: white;
+}
+
+.chart {
+  font: 1em 'Noto Sans', sans-serif;
+  background-color: #212121;
+  text-align: right;
+  padding: 3px;
   margin: 0 auto;
-  max-width: 1200px;
+  display: flex;
+}
+
+.steam-input {
+  padding: 6px;
+  border: solid 2px #4f9b94;
+  border-right: none;
+  border-radius: 3px;
+}
+
+.input-btn {
+  background-color: #80cbc4;
+  border-style: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  margin-left: -5px;
 }
