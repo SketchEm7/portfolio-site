@@ -50,6 +50,19 @@ def games():
     return resp
 
 
+@app.route('/instafeed')
+def instafeed():
+    insta_token = os.getenv('INSTA_TOKEN')
+    route_instafeed = f'https://api.instagram.com/v1/users/self/media/recent/?access_token={insta_token}'
+
+    data_instafeed = requests.get(route_instafeed).json()['data']
+    resp = Response(response=json.dumps(data_instafeed),
+                    status=200,
+                    mimetype='application/json')
+
+    return resp
+
+
 @app.route('/testsql')
 def sql_database():
     from test_sqlStuff.sqlquery import create_table
