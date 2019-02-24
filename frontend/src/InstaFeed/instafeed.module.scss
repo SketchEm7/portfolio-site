@@ -1,0 +1,17 @@
+.gallery {
+  display: flex;
+  flex-flow: column;
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 999;
+}
+
+.images {
+  margin-top: 2.5rem;
+}
+
+svg.insta-bg {
+  position: absolute;
+  top: 290px;
+}

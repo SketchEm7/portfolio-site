@@ -98,6 +98,17 @@ h1,h2,h3,h4,h5,h6,p,a,li {
     border-bottom: 4px solid;
 }
 
+.basicBar {
+  background-color: #000;
+  height: 40px;
+}
+.ui.vertical.menu {
+  background-color: #000;
+  position: absolute;
+  z-index: 999999;
+  height: 100%;
+}
+
 .desktop-containers-text{
     margin: 0 auto;
     max-width: 1200px;
@@ -165,8 +176,10 @@ h1,h2,h3,h4,h5,h6,p,a,li {
     margin: 10px 0 0;
 }
 
-
 .helper-text {
     font-size: .8em;
 }
 
+.test {
+  color: #fff;
+}

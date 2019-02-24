@@ -7,7 +7,13 @@ import GameReviews from './GameReviews/gameReviews';
 import ToDrawApp from './ToDrawApp/toDrawApp.js';
 import InstaFeed from './InstaFeed/instafeed';
 import Pokedex from './Pokedex/pokedex';
-import d3Logo from './assets/imgs/d3.png';
+import {
+    Container,
+    Icon,
+    Menu,
+    Sidebar,
+    Responsive
+} from "semantic-ui-react";
 
 
 class App extends Component {
@@ -15,10 +21,6 @@ class App extends Component {
     render() {
         const Header = (props) => <ul>
             <li>
-                {/*<Link to="/">*/}
-                    {/*<img src={d3Logo}/>*/}
-                    {/*<div className="logo" style={{ backgroundImage: `url(/src/assets/imgs/steam-logo-transparent.png)`}} />*/}
-                {/*</Link>*/}
                 <NavLink to="/" exact activeClassName="selected-navlink">Home</NavLink>
             </li>
             <li>
@@ -42,10 +44,39 @@ class App extends Component {
 
                     <Router>
                         <React.Fragment>
-                            <header className={"header"}>
-                                <h1 className={"header-text"}>SketchEm93</h1>
-                                <Route className={"navigation"} path="/" component={Header}/>
-                            </header>
+                            <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+                                <header className={"header"}>
+                                    <h1 className={"header-text"}>SketchEm93</h1>
+                                    <Route className={"navigation"} path="/" component={Header}/>
+                                </header>
+                            </Responsive>
+                            <Responsive {...Responsive.onlyMobile}>
+                                <div className={"basicBar"}>
+
+                                </div>
+                            </Responsive>
+                            <Responsive {...Responsive.onlyMobile}>
+                                <Menu className={"mobile-menu"} pointing vertical>
+                                    <li>
+                                        <Menu.Item link><NavLink to="/" exact activeClassName="selected-navlink">Home</NavLink></Menu.Item>
+                                    </li>
+                                    <li>
+                                        <Menu.Item link><NavLink to="/steam-data-viz" activeClassName="selected-navlink">Steam Data Viz</NavLink></Menu.Item>
+                                    </li>
+                                    <li>
+                                        <Menu.Item link><NavLink to="/game-reviews" activeClassName="selected-navlink">Game Reviews</NavLink></Menu.Item>
+                                    </li>
+                                    <li>
+                                        <Menu.Item link><NavLink to="/todraw-app" activeClassName="selected-navlink">ToDraw App</NavLink></Menu.Item>
+                                    </li>
+                                    <li>
+                                        <Menu.Item link><NavLink to="/instafeed" activeClassName="selected-navlink">InstaFeed</NavLink></Menu.Item>
+                                    </li>
+                                    <li>
+                                        <Menu.Item link><NavLink to="/pokedex" activeClassName="selected-navlink">Pokedex</NavLink></Menu.Item>
+                                    </li>
+                                </Menu>
+                            </Responsive>
 
                             <Switch>
                                 <Route path="/instafeed" component={InstaFeed}/>
