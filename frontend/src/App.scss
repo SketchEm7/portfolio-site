@@ -71,7 +71,7 @@ h1,h2,h3,h4,h5,h6,p,a,li {
 .header{
     background-color: #000;
     display: flex;
-    padding: 30px;
+    padding: 1em;
 }
 
 .header-text {
@@ -107,6 +107,7 @@ h1,h2,h3,h4,h5,h6,p,a,li {
   position: absolute;
   z-index: 999999;
   height: 100%;
+  top: 30px;
 }
 
 .desktop-containers-text{
@@ -119,6 +120,7 @@ h1,h2,h3,h4,h5,h6,p,a,li {
     color: #fff;
     width: 80%;
     margin: 100px auto;
+    padding: 1.5rem;
     position: absolute;
     left: 0;
     right: 0;
@@ -160,6 +162,8 @@ h1,h2,h3,h4,h5,h6,p,a,li {
     background-color: #ffcdd2;
     border-radius: 4px;
     color: #b71c1c;
+    margin: 1em auto;
+    max-width: 72%;
 }
 
 .undefined-msg-text {
@@ -182,4 +186,12 @@ h1,h2,h3,h4,h5,h6,p,a,li {
 
 .test {
   color: #fff;
+}
+
+@media (max-width: 1199px) {
+
+  .project-desc-container {
+    padding: 1em 3em;
+  }
+
 }

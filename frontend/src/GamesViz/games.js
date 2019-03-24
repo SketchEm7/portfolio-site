@@ -7,10 +7,12 @@ import React from "react";
 import styles from "./games.module.scss";
 import cx from 'classnames';
 import { Dropdown, Menu } from 'semantic-ui-react';
+import MediaQuery from 'react-responsive';
 
 class SteamGamesBarChart extends Component {
     WIDTH = 500;
     height = 500;
+    maxBarLength;
 
     constructor(props) {
         super(props);
@@ -31,6 +33,10 @@ class SteamGamesBarChart extends Component {
             personName: gamesResponse.data.name
         });
         this.createBarChart();
+    }
+
+    determineWindowSize() {
+        this.maxBarLength = .72 * window.innerWidth;
     }
 
     handleChange = name => event => {
@@ -60,77 +66,158 @@ class SteamGamesBarChart extends Component {
 
     componentDidUpdate() {
         this.createBarChart();
+        this.determineWindowSize();
     }
 
     createBarChart() {
         select("svg").selectAll("*").remove();
-        if (this.state.playedGames) {
+        if (this.maxBarLength > 1199) {
+            if (this.state.playedGames) {
 
-            const playedGames = this.state.playedGames;
-            const timePlayed = playedGames.map(game => game.playtime_forever);
-            const names = playedGames.map(game => game.name);
-            const unit = timePlayed.map((tp, index) => [tp, names[index]]);
+                const playedGames = this.state.playedGames;
+                const timePlayed = playedGames.map(game => game.playtime_forever);
+                const names = playedGames.map(game => game.name);
+                const unit = timePlayed.map((tp, index) => [tp, names[index]]);
 
-            if (this.state.sortOrder === "greatestToLeast") {
-                unit.sort((a, b) => b[0] - a[0]);
+                if (this.state.sortOrder === "greatestToLeast") {
+                    unit.sort((a, b) => b[0] - a[0]);
+                }
+
+                if (this.state.sortOrder === "leastToGreatest") {
+                    unit.sort((a, b) => a[0] - b[0]);
+                }
+
+                const maxTimePlayed = Math.max(...unit.map(u => u[0]));
+
+                const node = this.node;
+                const margin = ({top: 20, right: 0, bottom: 30, left: 40});
+
+
+                select(node)
+                    .selectAll('rect')
+                    .data(unit)
+                    .enter()
+                    .append('g')
+                    .attr("transform", "translate(0 ," + margin.top + ")")
+                    .append('rect');
+
+                select(node)
+                    .selectAll('rect')
+                    .data(unit)
+                    .exit()
+                    .remove();
+
+                select(node)
+                    .selectAll('rect')
+                    .data(unit)
+                    .style('fill', '#4f9b94')
+                    .attr('x', 0)
+                    .attr('y', (d,i) => i * 55)
+                    .attr('height', 45 - margin.top)
+                    .attr('width',d => {
+                        return this.maxBarLength * (d[0] / maxTimePlayed)
+                    });
+
+                select(node)
+                    .selectAll('text.labels')
+                    .data(unit)
+                    .enter()
+                    .append('g')
+                    .append('text')
+                    .text(function(d) {
+                        return d[1] + ' ' + ':' + ' ' + Number(Math.round((d[0]/60) + 'e2') + 'e-2').toFixed(2) + ' ' + 'hrs';
+                    })
+                    .attr('x', 0)
+                    .attr('y', (d,i) => i * 55 + 17)
+                    .attr('text-anchor', 'start')
+                    .attr('fill', '#fff');
+
             }
+        } else {
+            if (this.state.playedGames) {
 
-            if (this.state.sortOrder === "leastToGreatest") {
-                unit.sort((a, b) => a[0] - b[0]);
+                const playedGames = this.state.playedGames;
+                const timePlayed = playedGames.map(game => game.playtime_forever);
+                const names = playedGames.map(game => game.name);
+                const unit = timePlayed.map((tp, index) => [tp, names[index]]);
+
+                if (this.state.sortOrder === "greatestToLeast") {
+                    unit.sort((a, b) => b[0] - a[0]);
+                }
+
+                if (this.state.sortOrder === "leastToGreatest") {
+                    unit.sort((a, b) => a[0] - b[0]);
+                }
+
+                const maxTimePlayed = Math.max(...unit.map(u => u[0]));
+
+                const node = this.node;
+                const margin = ({top: 20, right: 0, bottom: 30, left: 40});
+
+
+                select(node)
+                    .selectAll('rect')
+                    .data(unit)
+                    .enter()
+                    .append('g')
+                    .attr("transform", "translate(0 ," + margin.top + ")")
+                    .append('rect');
+
+                select(node)
+                    .selectAll('rect')
+                    .data(unit)
+                    .exit()
+                    .remove();
+
+                select(node)
+                    .selectAll('rect')
+                    .data(unit)
+                    .style('fill', '#4f9b94')
+                    .attr('x', 0)
+                    .attr('y', (d,i) => i * 65 + 13)
+                    .attr('height', 45 - margin.top)
+                    .attr('width',d => {
+                        return this.maxBarLength * (d[0] / maxTimePlayed)
+                    });
+
+                select(node)
+                    .selectAll('text.labels')
+                    .data(unit)
+                    .enter()
+                    .append('g')
+                    .append('text')
+                    .text(function(d) {
+                        return d[1];
+                    })
+                    .attr('x', 0)
+                    .attr('y', (d,i) => i * 65 + 15)
+                    .attr('text-anchor', 'start')
+                    .attr('fill', '#fff');
+
+                select(node)
+                    .selectAll('text.labels')
+                    .data(unit)
+                    .enter()
+                    .append('g')
+                    .append('text')
+                    .text(function(d) {
+                        return  Number(Math.round((d[0]/60) + 'e2') + 'e-2').toFixed(2) + ' ' + 'hrs';
+                    })
+                    .attr('x', 0)
+                    .attr('y', (d,i) => i * 65 + 30)
+                    .attr('text-anchor', 'start')
+                    .attr('fill', '#fff');
+
             }
-
-            const maxTimePlayed = Math.max(...unit.map(u => u[0]));
-
-            const node = this.node;
-            const margin = ({top: 20, right: 0, bottom: 30, left: 40});
-
-
-            select(node)
-                .selectAll('rect')
-                .data(unit)
-                .enter()
-                .append('g')
-                .attr("transform", "translate(0 ," + margin.top + ")")
-                .append('rect');
-
-            select(node)
-                .selectAll('rect')
-                .data(unit)
-                .exit()
-                .remove();
-
-            select(node)
-                .selectAll('rect')
-                .data(unit)
-                .style('fill', '#4f9b94')
-                .attr('x', 0)
-                .attr('y', (d,i) => i * 55)
-                .attr('height', 45 - margin.top)
-                .attr('width',d => {
-                    return 1000 * (d[0] / maxTimePlayed)
-                });
-
-            select(node)
-                .selectAll('text.labels')
-                .data(unit)
-                .enter()
-                .append('g')
-                .append('text')
-                .text(function(d) {
-                    return d[1] + ' ' + ':' + ' ' + Number(Math.round((d[0]/60) + 'e2') + 'e-2').toFixed(2) + ' ' + 'hrs';
-                })
-                .attr('x', 0)
-                .attr('y', (d,i) => i * 55 + 17)
-                .attr('text-anchor', 'start')
-                .attr('fill', '#fff');
 
         }
+
 
 
     }
 
     render() {
-        const gamesSVG = <svg ref={node => this.node = node} width={1200} height={this.state.playedGames ? this.state.playedGames.length * 55 : 0} className={styles.chart} />;
+        const gamesSVG = <svg ref={node => this.node = node} width={'72%'} height={this.state.playedGames ? this.state.playedGames.length * 65 : 0} className={styles.chart} />;
         const privateProfileWarning = <div  className={"desktop-containers-text undefined-msg"}>
                                         <h2 className={"undefined-msg-text"}>Something went wrong.</h2>
                                         <ul className={"undefined-msg-ul"}>
@@ -139,6 +226,15 @@ class SteamGamesBarChart extends Component {
                                         </ul>
                                     </div>;
         const playedGamesContent = this.state.playedGames ? gamesSVG : privateProfileWarning;
+
+        const nameAndSort  =  <div className={styles['personName-container']}>
+            <h1 className={cx(styles.personName, "desktop-containers-text")}>{this.state.personName}'s Steam Games Stats</h1>
+            <div className={styles.dropdownContainer}>
+                <Menu compact>
+                    <Dropdown text="Sort Order" options={sortOrderOptions} simple item onChange={this.handleSortOrderChange} />
+                </Menu>
+            </div>
+        </div>;
 
         const sortOrderOptions = [
             { key: 1, text: 'Most played to least played', value: 'greatestToLeast' },
@@ -165,16 +261,10 @@ class SteamGamesBarChart extends Component {
                         </div>
                     </div>
                 </div>
-                <div className={styles['personName-container']}>
-                    <h1 className={cx(styles.personName, "desktop-containers-text")}>{this.state.personName}'s Steam Games Stats</h1>
-                    <div className={styles.dropdownContainer}>
-                        <Menu compact>
-                            <Dropdown text="Sort Order" options={sortOrderOptions} simple item onChange={this.handleSortOrderChange} />
-                        </Menu>
-                    </div>
-                </div>
+                { this.state.playedGames ? <nameAndSort/> : null }
                 {playedGamesContent}
             </div>
+
         );
     }
 }
