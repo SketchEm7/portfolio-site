@@ -24,7 +24,7 @@ class InstaFeed extends Component {
         let latestImages = null;
         if (this.state.images) {
             const images = this.state.images;
-            latestImages = images.slice(0, 10).map( (image, index) => {
+            latestImages = images.slice(0, 12).map( (image, index) => {
                 const imgUrl = image.images.standard_resolution.url;
                 return <img className={styles['images']} key={index} src={imgUrl}/>
             });
