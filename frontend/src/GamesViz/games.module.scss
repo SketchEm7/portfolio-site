@@ -11,7 +11,7 @@ $primary-color:  #80cbc4;
 .personName-container {
   background-color: #212121;
   margin: 20px auto;
-  width: 1200px;
+  width: 72%;
 }
 
 .dropdownContainer {
@@ -44,16 +44,4 @@ $primary-color:  #80cbc4;
   padding: 8px 20px;
   border-radius: 4px;
   margin-left: -5px;
-}
-
-@media (max-width: 1199px) {
-  .personName-container {
-    margin: 1em 3em;
-    width: auto;
-  }
-
-  .project-desc-container {
-    padding: 1em 3em;
-  }
-
 }

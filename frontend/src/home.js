@@ -11,14 +11,14 @@ class Home extends Component {
             <div>
                 <div className={"homepage-msg"}>
                     <h1 className={"intro-line"}>Hello and welcome to the portfolio site of Emily Melendez</h1>
-                    <h3>Work Experience</h3>
+                    <h3 className={"bio-subtitle"}>Work Experience</h3>
                     <p className={"bio-description"}>I am a UI/Frontend web developer with professional experience in Angular/Typescript, CSS, and HTML extensively. Of these my greatest strength has been CSS. Because of the stigma of this quasi-programming quasi-black magic language combined with my knowledge of its principles such as the cascade, and the box model, as well as with its wide depth in its many properties, I was able to roll up my sleeves and become the goto UI dev eventhough I has less overall experience than my co-workers. As for my non-professional technical experience, this website is loaded with a variety of projects utilizing different APIs. However, the entire site was created using the create-react-app and flask.</p>
 
-                    <h3>Personal Interests</h3>
+                    <h3 className={"bio-subtitle"}>Personal Interests</h3>
                     <p className={"bio-description"}>Drawing has been a hobby a mine for as long as I can remember. If you check out the Instafeed link in the navigation you will see some of my latest sketches. Sitting down with paper, pencils, and markers is one of my favorite ways to unplug. I have a dog. She is my first pet and therefore has me wrapped around her paw. I love to spend time with her, especially going to the park on warm days. I also like games. Video games, board games, card games, I admit I have my preferences, but overall a good game and a good beer makes for an awesome night.
                     </p>
 
-                    <h3>Contact Info</h3>
+                    <h3 className={"bio-subtitle"}>Contact Info</h3>
                     <ul className={"bio-description"}>
                         <li>Email: emily.melendez4@gmail.com</li>
                         <li>Phone: 484-278-3835</li>
