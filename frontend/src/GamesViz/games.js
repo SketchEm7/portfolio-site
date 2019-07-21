@@ -26,13 +26,21 @@ class SteamGamesBarChart extends Component {
 
     }
 
+    componentWillMount() {
+        this.createBarChart();
+    }
+
+    windowResized() {
+        this.createBarChart();
+    }
+
     async componentDidMount() {
         const gamesResponse = await axios.get(`/games`);
         this.setState({
             playedGames: gamesResponse.data.games.filter(game => game.playtime_forever > 1),
             personName: gamesResponse.data.name
         });
-        this.createBarChart();
+        window.addEventListener("resize", this.windowResized.bind(this));
     }
 
     determineWindowSize() {
@@ -66,11 +74,12 @@ class SteamGamesBarChart extends Component {
 
     componentDidUpdate() {
         this.createBarChart();
-        this.determineWindowSize();
     }
 
     createBarChart() {
+        console.log("FARRRRRT WISDOM");
         select("svg").selectAll("*").remove();
+        this.determineWindowSize();
         if (this.maxBarLength > 1199) {
             if (this.state.playedGames) {
 
@@ -226,20 +235,20 @@ class SteamGamesBarChart extends Component {
                                         </ul>
                                     </div>;
         const playedGamesContent = this.state.playedGames ? gamesSVG : privateProfileWarning;
-
-        const nameAndSort  =  <div className={styles['personName-container']}>
-            <h1 className={cx(styles.personName, "desktop-containers-text")}>{this.state.personName}'s Steam Games Stats</h1>
-            <div className={styles.dropdownContainer}>
-                <Menu compact>
-                    <Dropdown text="Sort Order" options={sortOrderOptions} simple item onChange={this.handleSortOrderChange} />
-                </Menu>
-            </div>
-        </div>;
-
-        const sortOrderOptions = [
+        const SortOrderOptions = [
             { key: 1, text: 'Most played to least played', value: 'greatestToLeast' },
             { key: 2, text: 'Least played to most played', value: 'leastToGreatest' },
         ];
+        const NameAndSort  =  <div className={styles['personName-container']}>
+            <h1 className={cx(styles.personName)}>{this.state.personName}'s Steam Games Stats</h1>
+            <div className={styles.dropdownContainer}>
+                <Menu compact>
+                    <Dropdown text="Sort Order" options={SortOrderOptions} simple item onChange={this.handleSortOrderChange} />
+                </Menu>
+            </div>
+        </div>;
+        const DisplaySort = this.state.playedGames ? NameAndSort : null;
+
 
         return (
             <div className={styles.GameChart}>
@@ -261,7 +270,7 @@ class SteamGamesBarChart extends Component {
                         </div>
                     </div>
                 </div>
-                { this.state.playedGames ? <nameAndSort/> : null }
+                {DisplaySort}
                 {playedGamesContent}
             </div>
 
