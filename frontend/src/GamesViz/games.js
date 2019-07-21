@@ -77,44 +77,44 @@ class SteamGamesBarChart extends Component {
     }
 
     createBarChart() {
-        console.log("FARRRRRT WISDOM");
         select("svg").selectAll("*").remove();
         this.determineWindowSize();
-        if (this.maxBarLength > 1199) {
-            if (this.state.playedGames) {
+        if (this.state.playedGames) {
 
-                const playedGames = this.state.playedGames;
-                const timePlayed = playedGames.map(game => game.playtime_forever);
-                const names = playedGames.map(game => game.name);
-                const unit = timePlayed.map((tp, index) => [tp, names[index]]);
+            const playedGames = this.state.playedGames;
+            const timePlayed = playedGames.map(game => game.playtime_forever);
+            const names = playedGames.map(game => game.name);
+            const unit = timePlayed.map((tp, index) => [tp, names[index]]);
 
-                if (this.state.sortOrder === "greatestToLeast") {
-                    unit.sort((a, b) => b[0] - a[0]);
-                }
+            if (this.state.sortOrder === "greatestToLeast") {
+                unit.sort((a, b) => b[0] - a[0]);
+            }
 
-                if (this.state.sortOrder === "leastToGreatest") {
-                    unit.sort((a, b) => a[0] - b[0]);
-                }
+            if (this.state.sortOrder === "leastToGreatest") {
+                unit.sort((a, b) => a[0] - b[0]);
+            }
 
-                const maxTimePlayed = Math.max(...unit.map(u => u[0]));
+            const maxTimePlayed = Math.max(...unit.map(u => u[0]));
 
-                const node = this.node;
-                const margin = ({top: 20, right: 0, bottom: 30, left: 40});
+            const node = this.node;
+            const margin = ({top: 20, right: 0, bottom: 30, left: 40});
 
 
-                select(node)
-                    .selectAll('rect')
-                    .data(unit)
-                    .enter()
-                    .append('g')
-                    .attr("transform", "translate(0 ," + margin.top + ")")
-                    .append('rect');
+            select(node)
+                .selectAll('rect')
+                .data(unit)
+                .enter()
+                .append('g')
+                .attr("transform", "translate(0 ," + margin.top + ")")
+                .append('rect');
 
-                select(node)
-                    .selectAll('rect')
-                    .data(unit)
-                    .exit()
-                    .remove();
+            select(node)
+                .selectAll('rect')
+                .data(unit)
+                .exit()
+                .remove();
+
+            if (this.maxBarLength > 1199) {
 
                 select(node)
                     .selectAll('rect')
@@ -141,43 +141,7 @@ class SteamGamesBarChart extends Component {
                     .attr('text-anchor', 'start')
                     .attr('fill', '#fff');
 
-            }
-        } else {
-            if (this.state.playedGames) {
-
-                const playedGames = this.state.playedGames;
-                const timePlayed = playedGames.map(game => game.playtime_forever);
-                const names = playedGames.map(game => game.name);
-                const unit = timePlayed.map((tp, index) => [tp, names[index]]);
-
-                if (this.state.sortOrder === "greatestToLeast") {
-                    unit.sort((a, b) => b[0] - a[0]);
-                }
-
-                if (this.state.sortOrder === "leastToGreatest") {
-                    unit.sort((a, b) => a[0] - b[0]);
-                }
-
-                const maxTimePlayed = Math.max(...unit.map(u => u[0]));
-
-                const node = this.node;
-                const margin = ({top: 20, right: 0, bottom: 30, left: 40});
-
-
-                select(node)
-                    .selectAll('rect')
-                    .data(unit)
-                    .enter()
-                    .append('g')
-                    .attr("transform", "translate(0 ," + margin.top + ")")
-                    .append('rect');
-
-                select(node)
-                    .selectAll('rect')
-                    .data(unit)
-                    .exit()
-                    .remove();
-
+            } else {
                 select(node)
                     .selectAll('rect')
                     .data(unit)
@@ -218,10 +182,7 @@ class SteamGamesBarChart extends Component {
                     .attr('fill', '#fff');
 
             }
-
         }
-
-
 
     }
 
