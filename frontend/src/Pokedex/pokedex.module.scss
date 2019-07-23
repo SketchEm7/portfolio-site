@@ -1,23 +1,12 @@
+
 $primary-color: #b30000;
 $screen-color: beige;
 $border-radius: 1rem;
+$font-family: 'Noto Sans', Roboto, sans-serif;
 
-.pokedex {
-  display: flex;
-  margin: 2rem auto;
-  width: 80%;
-}
 
-.pokedexDoor {
-  background-color: #b30000;
-  width: 50%;
-  height: 80%;
-  min-height: 800px;
-  position: relative;
-  bottom: -100px;
-  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 100%, 0 100%, 0 32%);
-  clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 100%, 0 100%, 0 32%);
-}
+
+
 
 .doorInset {
   border: inset 4px #fff;
@@ -31,13 +20,16 @@ $border-radius: 1rem;
 .pokedexMain {
   background-color: $primary-color;
   border-radius: $border-radius;
-  width: 50%;
+  width: 36%;
   height: 100%;
   min-height: 900px;
+  margin: 0 auto;
 }
 
 .pokedexHeader {
-
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .circle {
@@ -54,6 +46,61 @@ $border-radius: 1rem;
   width: 90%;
   margin: 20px auto;
   border-radius: $border-radius;
-  min-height: 25rem;
+  min-height: 50rem;
 }
 
+input {
+  border-radius: $border-radius;
+  width: 275px;
+  padding: .75em;
+  position: absolute;
+  top: 9px;
+}
+
+.suggestionsContainer {
+  padding: 1em;
+  top: 25px;
+  left: 122px;
+  position: absolute;
+}
+
+.suggestion {
+  background-color: #fff;
+  font-family: $font-family;
+  font-size: 16px;
+  padding: 12px 6px;
+  border: solid 1px grey;
+  width: 275px;
+}
+
+.suggestion:first-child {
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}
+
+.suggestion:last-child {
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+}
+
+@media screen and (max-width: 430px) {
+  .pokedexMain {
+    margin: 0 20px;
+    width: auto;
+  }
+
+  .circle {
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+  }
+
+  input {
+    border-radius: 1rem;
+    width: 171px;
+    padding: .75em;
+    top: 2px;
+    left: 82px;
+  }
+
+}
