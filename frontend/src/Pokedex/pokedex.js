@@ -2,7 +2,10 @@ import React, {Component} from "react";
 import styles from "./pokedex.module.scss";
 import axios from "axios";
 import Autosuggest from 'react-autosuggest';
-// import pokemonImage from `../assets/imgs/pokemon/${pokemonId}.png`;
+import {select} from "d3-selection";
+import cx from 'classnames';
+import d3Logo from "../assets/imgs/d3.png";
+import sqlLogo from "../assets/imgs/sqlite-square-icon.png";
 
 
 
@@ -86,6 +89,7 @@ class Pokedex extends Component {
         this.pokemon = await axios.get(`/pokedex/${suggestionValue}`);
 
         this.setState({
+            pokemon : this.pokemon.data,
             pokemonName: this.pokemon.data.name,
             pokemonId: this.pokemon.data.id,
             typeOne: this.pokemon.data.type_one,
@@ -98,152 +102,90 @@ class Pokedex extends Component {
             speed: this.pokemon.data.speed,
         });
 
-        switch (this.state.typeOne) {
-            case 'Fire':
-                this.setState({
-                    typeOneBackgroundColor: '#d00606'
-                });
-                break;
-            case 'Grass':
-                this.setState({
-                    typeOneBackgroundColor: '#028602'
-                });
-                break;
-            case 'Water':
-                this.setState({
-                    typeOneBackgroundColor: '#022882'
-                });
-                break;
-            case 'Bug':
-                this.setState({
-                    typeOneBackgroundColor: '#999900'
-                });
-                break;
-            case 'Poison':
-                this.setState({
-                    typeOneBackgroundColor: '#990099'
-                });
-                break;
-            case 'Flying':
-                this.setState({
-                    typeOneBackgroundColor: '#009999'
-                });
-                break;
-            case 'Normal':
-                this.setState({
-                    typeOneBackgroundColor: '#444400'
-                });
-                break;
-            case 'Electric':
-                this.setState({
-                    typeOneBackgroundColor: '#ce9e03'
-                });
-                break;
-            case 'Rock':
-                this.setState({
-                    typeOneBackgroundColor: '#4b433e'
-                });
-                break;
-            case 'Ground':
-                this.setState({
-                    typeOneBackgroundColor: '#906901'
-                });
-                break;
-            case 'Psychic':
-                this.setState({
-                    typeOneBackgroundColor: '#6600a3'
-                });
-                break;
-            case 'Fighting':
-                this.setState({
-                    typeOneBackgroundColor: '#990100'
-                });
-                break;
-            case 'Dragon':
-                this.setState({
-                    typeOneBackgroundColor: '#275074'
-                });
-                break;
-            case 'Fairy':
-                this.setState({
-                    typeOneBackgroundColor: '#d47d86'
-                });
-                break;
-        }
-
-        switch (this.state.typeTwo) {
-            case 'Fire':
-                this.setState({
-                    typeTwoBackgroundColor: '#d00606'
-                });
-                break;
-            case 'Grass':
-                this.setState({
-                    typeTwoBackgroundColor: '#028602'
-                });
-                break;
-            case 'Water':
-                this.setState({
-                    typeTwoBackgroundColor: '#022882'
-                });
-                break;
-            case 'Bug':
-                this.setState({
-                    typeTwoBackgroundColor: '#999900'
-                });
-                break;
-            case 'Poison':
-                this.setState({
-                    typeTwoBackgroundColor: '#990099'
-                });
-                break;
-            case 'Flying':
-                this.setState({
-                    typeTwoBackgroundColor: '#009999'
-                });
-                break;
-            case 'Normal':
-                this.setState({
-                    typeTwoBackgroundColor: '#444400'
-                });
-                break;
-            case 'Electric':
-                this.setState({
-                    typeTwoBackgroundColor: '#ce9e03'
-                });
-                break;
-            case 'Rock':
-                this.setState({
-                    typeTwoBackgroundColor: '#4b433e'
-                });
-                break;
-            case 'Ground':
-                this.setState({
-                    typeTwoBackgroundColor: '#906901'
-                });
-                break;
-            case 'Psychic':
-                this.setState({
-                    typeTwoBackgroundColor: '#6600a3'
-                });
-                break;
-            case 'Fighting':
-                this.setState({
-                    typeTwoBackgroundColor: '#990100'
-                });
-                break;
-            case 'Dragon':
-                this.setState({
-                    typeTwoBackgroundColor: '#275074'
-                });
-                break;
-            default:
-                this.setState({
-                    typeTwoBackgroundColor: 'transparent'
-                });
-        }
 
     };
+
+    componentDidUpdate() {
+        this.createBarChart();
+    }
+
+    createBarChart() {
+        select("svg").selectAll("*").remove();
+        const pokemon = this.state.pokemon;
+        let attackStat;
+        let maxTimePlayed;
+
+        if (!!pokemon) {
+            const excludeKeys = ['id', 'total'];
+
+            const unit = Object.keys(pokemon)
+                .filter(key => !!pokemon[key])
+                .filter(key => !excludeKeys.includes(key))
+                .filter(key => !isNaN(pokemon[key]))
+                .map(key => ({
+                    "name": key,
+                    "value": pokemon[key]
+                }));
+
+            const margin = ({top: 20, right: 0, bottom: 30, left: 40});
+
+            const node = this.node;
+
+            select(node)
+                .selectAll('rect')
+                .data(unit)
+                .enter()
+                .append('g')
+                .attr("viewBox", "0,0,150,420")
+                .attr("transform", "translate(0 ," + margin.top + ")")
+                .append('rect');
+
+            select(node)
+                .selectAll('rect')
+                .data(unit)
+                .exit()
+                .remove();
+
+
+            select(node)
+                .selectAll('rect')
+                .data(unit)
+                .style('fill', this.color1)
+                .attr('x', 0)
+                .attr('y', (d,i) => i * 55)
+                .attr('height', 45 - margin.top)
+                .attr('width', d => {
+                    return d.value * 1.5;
+                });
+
+
+            select(node)
+                .selectAll('text.labels')
+                .data(unit)
+                .enter()
+                .append('g')
+                .append('text')
+                .text(function(d) {
+                    if (d.name === 'sp_attack') {
+                        d.name = 'Special Attack'
+                    }
+
+                    if (d.name === 'sp_defense') {
+                        d.name = 'Special Defense'
+                    }
+
+                    return  d.name + ": " + d.value;
+                })
+                .attr('x', 0)
+                .attr('y', (d,i) => i * 55 + 17)
+                .attr('text-anchor', 'start')
+                .attr('fill', '#fff')
+                .style('font-size', '1em')
+                .style('text-transform', 'Uppercase');
+
+        }
+
+    }
 
     render() {
         const { value, suggestions } = this.state;
@@ -254,11 +196,60 @@ class Pokedex extends Component {
             value,
             onChange: this.onChange
         };
+        const statsSVG = this.state.pokemon ? <div className={styles.svgContainer}>
+                                                <h2 style={{color: '#fff', textAlign: 'center'}}>STATS</h2>
+                                                <svg ref={node => this.node = node}
+                                                     width={'100%'}
+                                                     height={'330px'}
+                                                     // viewBox="0 0 120 230"
+                                                     className={styles.statsChart}
+                                                />
+                                            </div> : null;
 
-        const pokemonImage = <img className={styles.pokemonImage} src={`${process.env.PUBLIC_URL}/pokemon/${this.state.pokemonId}.png`} alt={"pokemon-img"}/>
-        const showImage = this.state.pokemonId ? pokemonImage : null;
+        const pokemonId = this.state.pokemonId ? <div className={styles.pokemonId}>#{this.state.pokemonId}</div> : null;
+        const pokemonImage = this.state.pokemonId ? <img className={styles.pokemonImage} src={`${process.env.PUBLIC_URL}/pokemon/${this.state.pokemonId}.png`} alt={"pokemon-img"}/> : null;
+
+        let colorsByType = {
+            "Grass": "#028802",
+            "Fire": "#EA0707",
+            "Water": "#2B69FC",
+            "Bug": "#7A7A00",
+            "Poison": "#CE00CE",
+            "Flying": "#009999",
+            "Normal": "#5D5D00",
+            "Electric": "#B98E03",
+            "Rock": "#625751",
+            "Ground": "#906901",
+            "Psychic": "#8700D7",
+            "Ghost": "#605665",
+            "Fighting": "#B70100",
+            "Dragon": "#2D5D86",
+            "Ice": "#00A1CF",
+            "Fairy": "#D37B84",
+            "Steel": "#444444"
+        };
+
+        this.color1 = this.state.pokemon ? colorsByType[this.state.typeOne] : '';
+        let color2 = this.state.pokemon ? colorsByType[this.state.typeTwo]: '';
+
+
+        const typeTwoBadge = this.state.typeTwo ?  <span style={{backgroundColor: color2}} className={`${styles.type} ${styles.typeTwo}`}>{this.state.typeTwo}</span> : null;
+
         return(
             <div>
+                <div className={"project-desc-container"}>
+                    <h1 className={cx(styles.heading, "desktop-containers-text ")}>Pokedex</h1>
+                    <p className="header-text desktop-containers-text">For those unfamiliar with the world of Pokemon, a pokedex is a device where one can look up the stats of various pokemon. The pokedex below contains information on the original generation of pokemon. </p>
+                    <br/>
+
+                    <h3 className="header-text desktop-containers-text">Technologies Used</h3>
+                    <div className="tech-used-box desktop-containers-text">
+                        <div className="tech-logos-box">
+                            <img  className="tech-used-logo" src={sqlLogo} alt={"sqlite-logo"}/>
+                            <img className="tech-used-logo" src={d3Logo} alt={"d3-library-logo"}/>
+                        </div>
+                    </div>
+                </div>
                 <div className={styles.pokedex}>
                     <div className={styles.pokedexMain}>
                         <div className={styles.pokedexHeader}>
@@ -279,12 +270,16 @@ class Pokedex extends Component {
 
                         <div className={styles.pokedexScreen}>
                             <h1 className={styles.pokemonName}>{!!this.pokemon ? this.state.pokemonName : '' }</h1>
-                            {showImage}
-                            <div className={styles.pokemonId}>#{this.state.pokemonId}</div>
-                            <span style={{backgroundColor: this.state.typeOneBackgroundColor}} className={styles.type}>{this.state.typeOne}</span>
-                            <span style={{backgroundColor: this.state.typeTwoBackgroundColor}} className={styles.type}>{this.state.typeTwo}</span>
+                            {pokemonImage}
+                            {pokemonId}
+                            <div className={styles.typesContainer}>
+                                <span style={{backgroundColor: this.color1}} className={styles.type}>{this.state.typeOne}</span>
+                                {typeTwoBadge}
+                            </div>
+                            <div>
+                                {statsSVG}
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>

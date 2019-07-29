@@ -7,7 +7,6 @@ import React from "react";
 import styles from "./games.module.scss";
 import cx from 'classnames';
 import { Dropdown, Menu } from 'semantic-ui-react';
-import MediaQuery from 'react-responsive';
 
 class SteamGamesBarChart extends Component {
     WIDTH = 500;

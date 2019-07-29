@@ -11,7 +11,7 @@ $font-family: 'Noto Sans', Roboto, sans-serif;
   height: 100%;
   min-height: 900px;
   min-width: 500px;
-  margin: 0 auto;
+  margin: 32px auto;
 }
 
 .pokedexHeader {
@@ -64,12 +64,30 @@ $font-family: 'Noto Sans', Roboto, sans-serif;
   padding: 16px;
 }
 
+.typesContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 .type {
   font-size: 2em;
   font-weight: 600;
   color: #fff;
   border-radius: 12px;
   padding: 6px;
+}
+
+.typeTwo {
+  margin-left: 16px;
+}
+
+.svgContainer {
+  background-color: #000;
+  padding: 20px 24px;
+  margin: 36px 0;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
 }
 
 input {
@@ -108,7 +126,8 @@ input {
 
 @media screen and (max-width: 550px) {
   .pokedexMain {
-    margin: 0 20px;
+    margin: 32px 12px;
+    min-width: auto;
     width: auto;
   }
 
@@ -124,6 +143,18 @@ input {
     padding: .75em;
     top: 2px;
     left: 82px;
+  }
+
+  .pokemonName {
+    font-size: 2em;
+  }
+
+  .pokemonId {
+    font-size: 1.5em;
+  }
+
+  .type {
+    font-size: 1em;
   }
 
 }
