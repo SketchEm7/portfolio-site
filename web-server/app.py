@@ -71,16 +71,16 @@ def sql_database():
     return dynamic_data_entry()
 
 
-@app.route('/pokedex')
-def pokedex_db():
-    from pokedex_app.pokedex import get_pokemon
-    return get_pokemon()
-
-
 @app.route('/pokedex/<name>')
 def pokedex_name_lookup(name):
     from pokedex_app.pokedex import get_pokemon_by_name
     return get_pokemon_by_name(name)
+
+
+@app.route('/pokedex')
+def pokedex_db():
+    from pokedex_app.pokedex import get_pokemon
+    return get_pokemon()
 
 
 app.register_blueprint(todraw, url_prefix="/todraw")
