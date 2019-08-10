@@ -83,6 +83,11 @@ def pokedex_name_lookup(name):
     return get_pokemon_by_name(name)
 
 
+@app.route('/wordcloud')
+def wordcloud():
+    from word_cloud.wordcloud import get_cloud
+    return get_cloud()
+
 app.register_blueprint(todraw, url_prefix="/todraw")
 
 if __name__ == '_main_':
