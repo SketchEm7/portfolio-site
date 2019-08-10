@@ -1,15 +1,19 @@
 .gallery {
   display: flex;
-  flex-flow: column;
-  max-width: 640px;
+  flex-flow: row wrap;
+  max-width: 80%;
   margin: 0 auto;
   position: relative;
   width: 80%;
   z-index: 999;
+  max-height: 100%;
 }
 
 .images {
-  margin-top: 2.5rem;
+  height: 100%;
+  margin: 2.5rem 2rem 0 0;
+  max-width: 400px;
+  max-height: 400px;
   width: 100%;
 }
 

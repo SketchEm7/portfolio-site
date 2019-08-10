@@ -52,6 +52,7 @@ body {
 
 $primary-color: #80cbc4;
 $secondary-color: #4f9b94;
+$font-family: 'Noto Sans', Roboto, sans-serif;
 
 path {
     fill: #212121;
@@ -66,8 +67,13 @@ a, a:hover {
 }
 
 h1,h2,h3,h4,h5,h6,p,a,li {
-    font-family: 'Noto Sans', Roboto, sans-serif;
+    font-family: $font-family;
 }
+
+p {
+  font-size: 1.2em;
+}
+
 .header{
     background-color: #000;
     display: flex;
@@ -95,7 +101,7 @@ h1,h2,h3,h4,h5,h6,p,a,li {
     background-color: #000;
 }
 .selected-navlink {
-    border-bottom: 4px solid;
+    border-bottom: 2px solid;
 }
 
 .basicBar {
@@ -185,4 +191,17 @@ h1,h2,h3,h4,h5,h6,p,a,li {
 
 .helper-text {
     font-size: 1em;
+}
+
+.fadeIn {
+  -webkit-animation: cssAnimation 2s forwards;
+  animation: cssAnimation 2s forwards;
+}
+@keyframes cssAnimation {
+  0%   {opacity: 0;}
+  100% {opacity: 1;}
+}
+@-webkit-keyframes cssAnimation {
+  0%   {opacity: 0;}
+  100% {opacity: 1;}
 }
