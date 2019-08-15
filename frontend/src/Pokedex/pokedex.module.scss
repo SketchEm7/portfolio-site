@@ -157,4 +157,15 @@ input {
     font-size: 1em;
   }
 
+  .suggestionsContainer {
+    padding: 1em;
+    top: 36px;
+    left: 82px;
+    position: absolute;
+  }
+
+  .suggestion {
+    width: 170px;
+  }
+
 }

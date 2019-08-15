@@ -22,11 +22,21 @@ class App extends Component {
         }
     }
 
-    toggleHidden () {
+    toggleHidden() {
         this.setState({
             isHidden: !this.state.isHidden
-        })
+        });
+
+        if(this.state.isHidden === true) {
+            document.body.style.overflow = 'hidden';
+            console.log(document);
+            // document.body.getElementsByClassName('.parallax').style.opacity = '.3';
+        } else {
+            document.body.style.overflow = 'initial';
+        }
+
     }
+
 
     render() {
         const Header = (props) => <ul>
@@ -46,18 +56,18 @@ class App extends Component {
 
         const MobileMenu = (props) => <Menu className={"mobile-menu"} pointing vertical>
             <li>
-                <Menu.Item link><NavLink to="/" exact activeClassName="selected-navlink">Home</NavLink></Menu.Item>
+                <Menu.Item link><NavLink to="/" exact activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Home</NavLink></Menu.Item>
             </li>
             <li>
-                <Menu.Item link><NavLink to="/steam-data-viz" activeClassName="selected-navlink">Steam Data Viz</NavLink></Menu.Item>
+                <Menu.Item link><NavLink to="/steam-data-viz" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Steam Data Viz</NavLink></Menu.Item>
             </li>
             <li>
-                <Menu.Item link><NavLink to="/instafeed" activeClassName="selected-navlink">InstaFeed</NavLink></Menu.Item>
+                <Menu.Item link><NavLink to="/instafeed" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>InstaFeed</NavLink></Menu.Item>
             </li>
             <li>
-                <Menu.Item link><NavLink to="/pokedex" activeClassName="selected-navlink">Pokedex</NavLink></Menu.Item>
+                <Menu.Item link><NavLink to="/pokedex" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Pokedex</NavLink></Menu.Item>
             </li>
-        </Menu>
+        </Menu>;
 
         return (
 
@@ -65,13 +75,15 @@ class App extends Component {
                         <React.Fragment>
                             <Responsive minWidth={Responsive.onlyTablet.minWidth}>
                                 <header className={"header"}>
-                                    <h1 className={"header-text"}>SketchEm93</h1>
+                                    <h2 className={"header-text"}>SketchEm93</h2>
                                     <Route className={"navigation"} path="/" component={Header}/>
                                 </header>
                             </Responsive>
                             <Responsive {...Responsive.onlyMobile}>
                                 <header className={"header"}>
-                                    <h1 onClick={this.toggleHidden.bind(this)} className={"header-text"}>SketchEm93</h1>
+                                    { this.state.isHidden ? <Icon onClick={this.toggleHidden.bind(this)} name={"sidebar"} className={`mobile-menu-icon ${!this.state.isHidden ? 'active-menu' : ''}`} size="large"/> : null }
+                                    { !this.state.isHidden ? <Icon onClick={this.toggleHidden.bind(this)} name={"close"} className={`mobile-menu-icon ${!this.state.isHidden ? 'active-menu' : ''}`} size="large"/> : null }
+                                    <h2 onClick={this.toggleHidden.bind(this)} className={"header-text"}>SketchEm93</h2>
                                 </header>
                                 { !this.state.isHidden ? <MobileMenu/> : null }
                             </Responsive>

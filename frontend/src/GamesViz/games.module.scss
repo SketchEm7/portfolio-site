@@ -1,7 +1,7 @@
-$primary-color:  #80cbc4;
+@import "../variables";
 
 .GameChart {
-  background-color: #212121;
+  background-color: #000;
 }
 
 .GameChart h1 {
@@ -9,7 +9,7 @@ $primary-color:  #80cbc4;
 }
 
 .personName-container {
-  background-color: #212121;
+  background-color: #000;
   margin: 20px auto;
   width: 72%;
 }
@@ -24,7 +24,7 @@ $primary-color:  #80cbc4;
 
 .chart {
   font: 1em 'Noto Sans', sans-serif;
-  background-color: #212121;
+  background-color: #000;
   text-align: right;
   padding: 3px;
   margin: 0 auto;
@@ -33,13 +33,13 @@ $primary-color:  #80cbc4;
 
 .steam-input {
   padding: 6px;
-  border: solid 2px #4f9b94;
+  border: solid 2px $secondary-color;
   border-right: none;
   border-radius: 3px;
 }
 
 .input-btn {
-  background-color: #80cbc4;
+  background-color: $primary-color;
   border-style: none;
   padding: 8px 20px;
   border-radius: 4px;

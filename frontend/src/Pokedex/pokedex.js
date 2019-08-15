@@ -8,7 +8,6 @@ import d3Logo from "../assets/imgs/d3.png";
 import sqlLogo from "../assets/imgs/sqlite-square-icon.png";
 
 
-
 class Pokedex extends Component {
 
     pokedex;
