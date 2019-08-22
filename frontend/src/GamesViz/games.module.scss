@@ -45,3 +45,45 @@
   border-radius: 4px;
   margin-left: -5px;
 }
+
+p.loaderTemp {
+  color: #fff !important;
+  font-size: 3em !important;
+}
+
+.loadingBG {
+  background-color: #000000;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 23%;
+  left: 40%;
+  width: 500px;
+  height: 500px;
+  margin-top: -1px;
+  margin-left: -48px;
+  border-radius: 50%;
+  border-top: 12px solid #fff;
+  border-right: 12px solid transparent;
+  animation: spinner 1s linear infinite;
+}
+
+.loadingText {
+  color: #fff;
+  box-sizing: border-box;
+  position: absolute;
+  top: 45%;
+  left: 49%;
+  width: 500px;
+  height: 500px;
+  margin-top: -1px;
+  margin-left: -48px;
+  font-size: 48px;
+}

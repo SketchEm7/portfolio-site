@@ -179,10 +179,15 @@ i.icon.active-menu {
 .projects-section {
   background-color: rgba(11, 46, 90, 0.75);
   color: #fff;
-  -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 67%);
-  clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 67%);
+  -webkit-clip-path: polygon(0 0, 100% 8%, 100% 100%, 0% 100%);
+  clip-path: polygon(0 0, 100% 8%, 100% 100%, 0% 100%);
   padding: 3em;
-  min-height: 570px;
+  //min-height: 570px;
+}
+
+.projects-imgs-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .professional-section {
@@ -196,7 +201,11 @@ i.icon.active-menu {
   max-width: 72%;
 }
 
-.bio-subtitle {
+h2.bio-subtitle {
+  margin-bottom: 1rem;
+}
+
+h3.bio-subtitle {
   margin-top: 1em;
 }
 
@@ -277,21 +286,69 @@ i.icon.active-menu {
 }
 
 button {
-  background-color: $primary-color;
+  background-color: #fff;
   border-style: none;
   padding: 8px 20px;
   border-radius: 4px;
   margin-left: -5px;
 }
 
+.hvr-sweep-to-right:before {
+  border-radius: $border-radius;
+}
+
 .thumbnail {
-  max-height: 190px;
   margin: 8px;
-  width: calc(25% - 16px);
+  width: 100%;
 }
 
 .thumbnail:first-child {
   margin-left: 0;
+}
+
+.ui.styled.accordion {
+  background: transparent;
+  box-shadow: none;
+  width: calc(25% - 16px);
+}
+
+.ui.styled.accordion .title {
+  padding: 0;
+  overflow: hidden;
+}
+
+.ui.accordion .active.content {
+  background-color: #fefefe;
+  border-radius: $border-radius;
+  color: #000;
+  margin-top: -13px;
+}
+
+.ui.accordion .active.content p {
+  margin: 16px 0;
+}
+
+.project-links {
+  color: $alt-primary-color;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1rem 0;
+}
+
+.project-links:hover {
+  text-decoration: underline;
+}
+
+.resume-btn{
+  margin-top: 2rem;
+}
+
+.email-link {
+  color: #fff;
+}
+
+.email-link:hover {
+  color: #2098D1;
 }
 
 @keyframes cssAnimation {
@@ -308,25 +365,57 @@ button {
   color: #fff;
 }
 
-@media screen and (max-width: 768px) {
-  .thumbnail {
+.tablet {
+  display: none;
+}
+
+@media screen and (max-width: 940px) {
+  .desktop {
+    display: none;
+  }
+
+  .tablet {
+    display: flex;
+  }
+
+  .ui.styled.accordion {
+    width: 100%;
+  }
+
+  .tablet-column {
     width: calc(50% - 16px);
   }
+}
+
+@media screen and (max-width: 768px) {
   .section {
     background-color: rgba(6, 29, 58, 0.75);
   }
 }
 
 @media screen and (max-width: 600px){
+
+  .buffer1 {
+    height: 200px;
+  }
+
   .projects-section,
   .professional-section {
     -webkit-clip-path: none;
     clip-path: none;
   }
 
-  .thumbnail {
+  .projects-imgs-container {
+    flex-flow: column;
+  }
+
+  .ui.styled.accordion {
     width: 100%;
     margin: 1rem auto;
+  }
+
+  .tablet-column {
+    width: auto;
   }
 
   .project-desc-container {

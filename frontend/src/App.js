@@ -12,6 +12,7 @@ import {
     Sidebar,
     Responsive
 } from "semantic-ui-react";
+import WordCloud from './WordCloud/wordcloud';
 
 
 class App extends Component {
@@ -52,6 +53,9 @@ class App extends Component {
             <li>
                 <NavLink to="/pokedex" activeClassName="selected-navlink">Pokedex</NavLink>
             </li>
+            <li>
+                <NavLink to="/wordcloud" activeClassName="selected-navlink">Word Cloud</NavLink>
+            </li>
         </ul>;
 
         const MobileMenu = (props) => <Menu className={"mobile-menu"} pointing vertical>
@@ -66,6 +70,9 @@ class App extends Component {
             </li>
             <li>
                 <Menu.Item link><NavLink to="/pokedex" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Pokedex</NavLink></Menu.Item>
+            </li>
+            <li>
+                <Menu.Item link><NavLink to="/wordcloud" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Word Cloud</NavLink></Menu.Item>
             </li>
         </Menu>;
 
@@ -89,8 +96,9 @@ class App extends Component {
                             </Responsive>
 
                             <Switch>
-                                <Route path="/instafeed" component={InstaFeed}/>
+                                <Route path="/wordcloud" component={WordCloud}/>
                                 <Route path="/pokedex" component={Pokedex}/>
+                                <Route path="/instafeed" component={InstaFeed}/>
                                 <Route path="/steam-data-viz" component={SteamGamesBarChart}/>
                                 <Route exact path="/" component={Home}/>
                             </Switch>
