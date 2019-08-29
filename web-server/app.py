@@ -1,4 +1,4 @@
-from flask import Flask, Response, render_template, request, jsonify
+from flask import Flask, Response, render_template, request, send_from_directory
 import requests
 import json
 import os
@@ -84,6 +84,9 @@ def pokedex_db():
     return get_pokemon()
 
 
+@app.route('/pokemon/<path:filename>')
+def pokemon_image(path):
+  return send_from_directory("../frontend/build/pokemon", path)
 
 
 app.register_blueprint(todraw, url_prefix="/todraw")
