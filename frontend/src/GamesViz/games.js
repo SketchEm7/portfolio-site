@@ -38,7 +38,7 @@ class SteamGamesBarChart extends Component {
         this.setState({
             loading: true
         });
-        const gamesResponse = await axios.get(`/games`);
+        const gamesResponse = await axios.get(`/api/games`);
         this.setState({
             playedGames: gamesResponse.data.games.filter(game => game.playtime_forever > 1),
             personName: gamesResponse.data.name,
@@ -65,7 +65,7 @@ class SteamGamesBarChart extends Component {
 
 
     loadSteamId = async () => {
-        const gamesResponse = await axios.get(`/games?steam_id=${ this.state.steamId }`);
+        const gamesResponse = await axios.get(`/api/games?steam_id=${ this.state.steamId }`);
         if (gamesResponse.data) {
             this.setState({
                 playedGames: gamesResponse.data.games && gamesResponse.data.games.filter(game => game.playtime_forever > 1),

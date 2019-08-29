@@ -22,7 +22,7 @@ class InstaFeed extends Component {
         this.setState({
             loading: true
         });
-        const instafeedResponse = await axios.get(`/instafeed`);
+        const instafeedResponse = await axios.get(`/api/instafeed`);
         this.setState({
             images: instafeedResponse.data,
             loading: false

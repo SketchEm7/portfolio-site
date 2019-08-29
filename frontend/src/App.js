@@ -45,16 +45,16 @@ class App extends Component {
                 <NavLink to="/" exact activeClassName="selected-navlink">Home</NavLink>
             </li>
             <li>
-                <NavLink to="/api/steam-data-viz" activeClassName="selected-navlink">Steam Data Viz</NavLink>
+                <NavLink to="/steam-data-viz" activeClassName="selected-navlink">Steam Data Viz</NavLink>
             </li>
             <li>
-                <NavLink to="/api/instafeed" activeClassName="selected-navlink">InstaFeed</NavLink>
+                <NavLink to="/instafeed" activeClassName="selected-navlink">InstaFeed</NavLink>
             </li>
             <li>
-                <NavLink to="/api/pokedex" activeClassName="selected-navlink">Pokedex</NavLink>
+                <NavLink to="/pokedex" activeClassName="selected-navlink">Pokedex</NavLink>
             </li>
             <li>
-                <NavLink to="/api/wordcloud" activeClassName="selected-navlink">Word Cloud</NavLink>
+                <NavLink to="/wordcloud" activeClassName="selected-navlink">Word Cloud</NavLink>
             </li>
         </ul>;
 
@@ -63,16 +63,16 @@ class App extends Component {
                 <Menu.Item link><NavLink to="/" exact activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Home</NavLink></Menu.Item>
             </li>
             <li>
-                <Menu.Item link><NavLink to="/api/steam-data-viz" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Steam Data Viz</NavLink></Menu.Item>
+                <Menu.Item link><NavLink to="/steam-data-viz" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Steam Data Viz</NavLink></Menu.Item>
             </li>
             <li>
-                <Menu.Item link><NavLink to="/api/instafeed" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>InstaFeed</NavLink></Menu.Item>
+                <Menu.Item link><NavLink to="/instafeed" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>InstaFeed</NavLink></Menu.Item>
             </li>
             <li>
-                <Menu.Item link><NavLink to="/api/pokedex" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Pokedex</NavLink></Menu.Item>
+                <Menu.Item link><NavLink to="/pokedex" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Pokedex</NavLink></Menu.Item>
             </li>
             <li>
-                <Menu.Item link><NavLink to="/api/wordcloud" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Word Cloud</NavLink></Menu.Item>
+                <Menu.Item link><NavLink to="/wordcloud" activeClassName="selected-navlink" onClick={this.toggleHidden.bind(this)}>Word Cloud</NavLink></Menu.Item>
             </li>
         </Menu>;
 
@@ -96,10 +96,10 @@ class App extends Component {
                             </Responsive>
 
                             <Switch>
-                                <Route path="/api/wordcloud" component={WordCloud}/>
-                                <Route path="/api/pokedex" component={Pokedex}/>
-                                <Route path="/api/instafeed" component={InstaFeed}/>
-                                <Route path="/api/steam-data-viz" component={SteamGamesBarChart}/>
+                                <Route path="/wordcloud" component={WordCloud}/>
+                                <Route path="/pokedex" component={Pokedex}/>
+                                <Route path="/instafeed" component={InstaFeed}/>
+                                <Route path="/steam-data-viz" component={SteamGamesBarChart}/>
                                 <Route exact path="/" component={Home}/>
                             </Switch>
                         </React.Fragment>

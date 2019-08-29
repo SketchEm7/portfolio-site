@@ -55,7 +55,7 @@ class Pokedex extends Component {
     }
 
     async componentDidMount(){
-        this.pokedex = await axios.get(`/pokedex`);
+        this.pokedex = await axios.get(`/api/pokedex`);
         this.setState({
             pokedex: this.pokedex.data,
         });
@@ -85,7 +85,7 @@ class Pokedex extends Component {
     };
 
     onSuggestionSelected = async (selected, {suggestionValue}) => {
-        this.pokemon = await axios.get(`/pokedex/${suggestionValue}`);
+        this.pokemon = await axios.get(`/api/pokedex/${suggestionValue}`);
 
         this.setState({
             pokemon : this.pokemon.data,

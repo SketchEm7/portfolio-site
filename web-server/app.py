@@ -29,7 +29,7 @@ class List(db.Model):
 def index(path):
     return render_template("index.html")
 
-@app.route('/games')
+@app.route('/api/games')
 def games():
     sid = request.args.get('steam_id', 76561198085130667)
     print(sid)
@@ -50,7 +50,7 @@ def games():
     return resp
 
 
-@app.route('/instafeed')
+@app.route('/api/instafeed')
 def instafeed():
     insta_token = os.getenv('INSTA_TOKEN')
     route_instafeed = f'https://api.instagram.com/v1/users/self/media/recent/?access_token={insta_token}'
@@ -63,7 +63,7 @@ def instafeed():
     return resp
 
 
-@app.route('/testsql')
+@app.route('/api/testsql')
 def sql_database():
     from test_sqlStuff.sqlquery import create_table
     from test_sqlStuff.sqlquery import dynamic_data_entry
@@ -71,20 +71,20 @@ def sql_database():
     return dynamic_data_entry()
 
 
-@app.route('/pokedex/<name>')
+@app.route('/api/pokedex/<name>')
 def pokedex_name_lookup(name):
     from pokedex_app.pokedex import get_pokemon_by_name
     return get_pokemon_by_name(name)
 
 
 
-@app.route('/pokedex')
+@app.route('/api/pokedex')
 def pokedex_db():
     from pokedex_app.pokedex import get_pokemon
     return get_pokemon()
 
 
-@app.route('/pokemon/<path>')
+@app.route('/api/pokemon/<path>')
 def pokemon_image(path):
   return send_from_directory("../frontend/build/pokemon", path)
 

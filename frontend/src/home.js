@@ -61,7 +61,7 @@ class Home extends Component {
                                     <p>
                                         This project is a data visualization created using the D3 library and data provided from the Steam API.
                                     </p>
-                                    <Link to="/api/steam-data-viz" className={"project-links"}>View Project</Link>
+                                    <Link to="/steam-data-viz" className={"project-links"}>View Project</Link>
                                 </Accordion.Content>
                             </Accordion>
                             <Accordion styled>
@@ -72,7 +72,7 @@ class Home extends Component {
                                     <p>
                                         I like to draw things.
                                     </p>
-                                    <Link to="/api/instafeed" className={"project-links"}>View Project</Link>
+                                    <Link to="/instafeed" className={"project-links"}>View Project</Link>
                                 </Accordion.Content>
                             </Accordion>
                             <Accordion styled>
@@ -83,7 +83,7 @@ class Home extends Component {
                                     <p>
                                         Welcome to the world of Pokemon! Look up the stats on the first generation of pocket monsters.
                                     </p>
-                                    <Link to="/api/pokedex" className={"project-links"}>View Project</Link>
+                                    <Link to="/pokedex" className={"project-links"}>View Project</Link>
                                 </Accordion.Content>
                             </Accordion>
                             <Accordion styled>
@@ -94,7 +94,7 @@ class Home extends Component {
                                     <p>
                                         Wordcloud images generated with python wordcloud library
                                     </p>
-                                    <Link to="/api/wordcloud" className={"project-links"}>View Project</Link>
+                                    <Link to="/wordcloud" className={"project-links"}>View Project</Link>
                                 </Accordion.Content>
                             </Accordion>
                         </div>
@@ -108,7 +108,7 @@ class Home extends Component {
                                         <p>
                                             This project is a data visualization created using the D3 library and data provided from the Steam API.
                                         </p>
-                                        <Link to="/api/steam-data-viz" className={"project-links"}>View Project</Link>
+                                        <Link to="/steam-data-viz" className={"project-links"}>View Project</Link>
                                     </Accordion.Content>
                                 </Accordion>
                                 <Accordion styled>
@@ -119,7 +119,7 @@ class Home extends Component {
                                         <p>
                                             I like to draw things.
                                         </p>
-                                        <Link to="/api/instafeed" className={"project-links"}>View Project</Link>
+                                        <Link to="/instafeed" className={"project-links"}>View Project</Link>
                                     </Accordion.Content>
                                 </Accordion>
                             </div>
@@ -132,7 +132,7 @@ class Home extends Component {
                                         <p>
                                             Welcome to the world of Pokemon! Look up the stats on the first generation of pocket monsters.
                                         </p>
-                                        <Link to="/api/pokedex" className={"project-links"}>View Project</Link>
+                                        <Link to="/pokedex" className={"project-links"}>View Project</Link>
                                     </Accordion.Content>
                                 </Accordion>
                                 <Accordion styled>
@@ -143,7 +143,7 @@ class Home extends Component {
                                         <p>
                                             Wordcloud images generated with python wordcloud library
                                         </p>
-                                        <Link to="/api/wordcloud" className={"project-links"}>View Project</Link>
+                                        <Link to="/wordcloud" className={"project-links"}>View Project</Link>
                                     </Accordion.Content>
                                 </Accordion>
                             </div>
