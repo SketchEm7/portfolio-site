@@ -84,7 +84,7 @@ def pokedex_db():
     return get_pokemon()
 
 
-@app.route('/api/pokemon/<path>')
+@app.route('/pokemon/<path>')
 def pokemon_image(path):
   return send_from_directory("../frontend/build/pokemon", path)
 
