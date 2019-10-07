@@ -46,6 +46,10 @@
   margin-left: -5px;
 }
 
+.coverImage img{
+  min-width: 150px;
+}
+
 p.loaderTemp {
   color: #fff !important;
   font-size: 3em !important;
@@ -53,6 +57,20 @@ p.loaderTemp {
 
 .loadingBG {
   background-color: #000000;
+}
+
+.gameLink {
+  color: $alt-primary-color;
+  font-size: 1.2em;
+}
+
+.gameLink:hover {
+  color: $alt-primary-color;
+  text-decoration: underline;
+}
+
+.gameLinkLi {
+  padding: .4em 0;
 }
 
 @keyframes spinner {

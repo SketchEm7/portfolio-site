@@ -29,7 +29,7 @@ class WordCloud extends Component {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.cloudContainer}>
                         <img className={styles.wordcloud} src={glados} alt={"homer-simpson-word-cloud"}/>
                         <img className={styles.wordcloud} src={homer} alt={"homer-simpson-word-cloud"}/>
                         <img className={styles.wordcloud} src={frankenstein} alt={"homer-simpson-word-cloud"}/>

@@ -4,6 +4,7 @@ import styles from "./instafeed.module.scss";
 import cx from 'classnames';
 import instaLogo from "../assets/imgs/instagram-logo.png";
 import { Dimmer, Loader } from 'semantic-ui-react';
+import { Button, Header, Icon, Image, Modal } from 'semantic-ui-react';
 
 class InstaFeed extends Component {
 
@@ -16,6 +17,7 @@ class InstaFeed extends Component {
         };
 
         this.imgContainer = React.createRef();
+
     }
 
     async componentDidMount() {
@@ -43,6 +45,7 @@ class InstaFeed extends Component {
             <Loader size='massive'>Loading</Loader>
         </Dimmer>;
 
+
         return(
             <div>{this.state.loading ? <LoadingMessage/> :
                 <div>
@@ -57,6 +60,7 @@ class InstaFeed extends Component {
                         </div>
                     </div>
                     <div>
+
                         <div className={styles['gallery']} ref={this.imgContainer}>
                             {latestImages}
                         </div>
