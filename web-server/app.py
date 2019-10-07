@@ -3,6 +3,7 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from to_draw_app.item_manager import todraw
@@ -17,6 +18,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 
 db = SQLAlchemy(app)
 
+
 class List(db.Model):
     title = db.Column(db.String(80), unique=True, nullable=False, primary_key=True)
 
@@ -28,6 +30,7 @@ class List(db.Model):
 @app.route('/<path:path>')
 def index(path):
     return render_template("index.html")
+
 
 @app.route('/api/games')
 def games():
@@ -42,8 +45,61 @@ def games():
 
     result = data_games
     result['name'] = data_name['players'][0]['personaname']
+    result['avatarmedium'] = data_name['players'][0]['avatarmedium']
 
     resp = Response(response=json.dumps(result),
+                    status=200,
+                    mimetype='application/json')
+
+    return resp
+
+
+@app.route('/api/game-news/<app_id>')
+def game_news(app_id):
+    route_news = f'http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid={app_id}&count=3&maxlength=300&format=json'
+    data_news = requests.get(route_news).json()
+    result = data_news
+    result['title'] = data_news['appnews']['newsitems'][0]['title']
+    result['link'] = data_news['appnews']['newsitems'][0]['url']
+
+    resp = Response(response=json.dumps(result),
+                    status=200,
+                    mimetype='application/json')
+    return resp
+
+
+@app.route('/api/game-extras/<name>', methods=['GET'])
+def game_info(name):
+    game_req = requests.post('https://api-v3.igdb.com/games',
+                             headers={
+                                 'Accept': 'application/json',
+                                 'user-key': os.getenv('IGDB_KEY')
+                             },
+                             data=f'fields cover, summary; search \"{name}\";')
+    game = game_req.json()[0]
+
+    cover_req = requests.post('https://api-v3.igdb.com/covers',
+                              headers={
+                                  'Accept': 'application/json',
+                                  'user-key': os.getenv('IGDB_KEY')
+                              },
+                              data=f'fields image_id; where id={game["cover"]};')
+    cover_id = cover_req.json()[0]['image_id']
+
+    review_req = requests.post('https://api-v3.igdb.com/feeds',
+                               headers={
+                                  'Accept': 'application/json',
+                                  'user-key': os.getenv('IGDB_KEY')
+                              },
+                               data=f'fields content, published_at, updated_at; where games={game["id"]};')
+    review = review_req.json()
+
+    resp_text = json.dumps({
+        'summary': game['summary'],
+        'cover': f"https://images.igdb.com/igdb/image/upload/t_logo_med/{cover_id}.jpg",
+        'review': review,
+    })
+    resp = Response(response=resp_text,
                     status=200,
                     mimetype='application/json')
 
@@ -77,7 +133,6 @@ def pokedex_name_lookup(name):
     return get_pokemon_by_name(name)
 
 
-
 @app.route('/api/pokedex')
 def pokedex_db():
     from pokedex_app.pokedex import get_pokemon
@@ -86,7 +141,7 @@ def pokedex_db():
 
 @app.route('/pokemon/<path>')
 def pokemon_image(path):
-  return send_from_directory("../frontend/build/pokemon", path)
+    return send_from_directory("../frontend/build/pokemon", path)
 
 
 app.register_blueprint(todraw, url_prefix="/todraw")

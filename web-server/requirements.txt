@@ -20,7 +20,6 @@ multidict==4.5.2
 numpy==1.17.0
 packaging==19.1
 Pillow==6.1.0
-pkg-resources==0.0.0
 pluggy==0.12.0
 py==1.8.0
 pyparsing==2.4.2
