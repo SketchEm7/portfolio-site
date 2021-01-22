@@ -2,6 +2,7 @@ from flask import Flask, Response, render_template, request, send_from_directory
 import requests
 import json
 import os
+import pandas as pd
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,6 +18,10 @@ database_file = "sqlite:///{}".format(os.path.join(project_dir, "todrawdatabase.
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 
 db = SQLAlchemy(app)
+
+df = pd.read_csv('./games.csv')
+stompGames = df[ abs( df['white_rating'] - df['black_rating'] ) >= 1000 ]
+checkmates = stompGames.where(stompGames['victory_status'] == 'mate')
 
 
 class List(db.Model):
@@ -143,6 +148,26 @@ def pokedex_db():
 def pokemon_image(path):
     return send_from_directory("../frontend/build/pokemon", path)
 
+
+@app.route('/chess-pieces/<path>')
+def chess_pieces_image(path):
+    return send_from_directory("../frontend/build/chess-pieces", path)
+
+
+@app.route('/api/chess/quick_mismatch')
+def getQuickestStomp():
+    firstQuickestStomp = checkmates.loc[checkmates['id'] == checkmates.iloc[checkmates['turns'].argmin()]['id']]
+    return Response(response=firstQuickestStomp.to_json(orient="records"),
+                    status=200,
+                    mimetype='application/json')
+
+
+@app.route('/api/chess/long_mismatch')
+def getLongestStomp():
+    firstLongestStomp = checkmates.loc[checkmates['id'] == checkmates.iloc[checkmates['turns'].argmax()]['id']]
+    return Response(response=firstLongestStomp.to_json(orient="records"),
+                    status=200,
+                    mimetype='application/json')
 
 app.register_blueprint(todraw, url_prefix="/todraw")
 
