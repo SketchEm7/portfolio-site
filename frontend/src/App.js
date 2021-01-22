@@ -13,7 +13,7 @@ import {
     Responsive
 } from "semantic-ui-react";
 import WordCloud from './WordCloud/wordcloud';
-
+import ChessComponent  from './chess/chess-component';
 
 class App extends Component {
     constructor () {
@@ -48,7 +48,7 @@ class App extends Component {
                 <NavLink to="/steam-data-viz" activeClassName="selected-navlink">Steam Data Viz</NavLink>
             </li>
             <li>
-                <NavLink to="/instafeed" activeClassName="selected-navlink">InstaFeed</NavLink>
+                <NavLink to="/chess" activeClassName="selected-navlink">Chess</NavLink>
             </li>
             <li>
                 <NavLink to="/pokedex" activeClassName="selected-navlink">Pokedex</NavLink>
@@ -82,7 +82,7 @@ class App extends Component {
                         <React.Fragment>
                             <Responsive minWidth={Responsive.onlyTablet.minWidth}>
                                 <header className={"header"}>
-                                    <h2 className={"header-text"}>SketchEm93</h2>
+                                    <h2 className={"header-text"}>EM</h2>
                                     <Route className={"navigation"} path="/" component={Header}/>
                                 </header>
                             </Responsive>
@@ -98,7 +98,7 @@ class App extends Component {
                             <Switch>
                                 <Route path="/wordcloud" component={WordCloud}/>
                                 <Route path="/pokedex" component={Pokedex}/>
-                                <Route path="/instafeed" component={InstaFeed}/>
+                                <Route path="/chess" component={ChessComponent}/>
                                 <Route path="/steam-data-viz" component={SteamGamesBarChart}/>
                                 <Route exact path="/" component={Home}/>
                             </Switch>

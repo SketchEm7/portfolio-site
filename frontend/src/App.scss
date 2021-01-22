@@ -27,9 +27,7 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1;
 }
-ol, ul {
-  list-style: none;
-}
+
 blockquote, q {
   quotes: none;
 }
@@ -104,6 +102,7 @@ i.icon.active-menu {
 .header-text {
   color: #fff;
   line-height: 1.3em;
+  font-family: $font-family;
 }
 
 .header ul {
@@ -254,6 +253,10 @@ h3.bio-subtitle {
 .tech-used-logo {
   height: 50px;
   width: 50px;
+}
+
+.tech-used-logo-dark {
+  background-color: #fff;
 }
 
 .undefined-msg {
